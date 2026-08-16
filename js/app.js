@@ -109,8 +109,33 @@
     document.querySelectorAll('[data-participant]').forEach(card=>{card.onclick=()=>{selected=card.dataset.participant;document.querySelectorAll('[data-participant]').forEach(item=>item.classList.toggle('is-selected',item===card));document.querySelector('[data-participant-hint]').textContent='Выбери парадную платформу'};card.ondragstart=event=>{selected=card.dataset.participant;event.dataTransfer.setData('text/plain',selected);card.classList.add('is-dragging')};card.ondragend=()=>card.classList.remove('is-dragging')});
     document.querySelectorAll('[data-platform]').forEach(platform=>{platform.onclick=()=>{if(selected)place(selected,+platform.dataset.platform)};platform.ondragover=event=>event.preventDefault();platform.ondragenter=()=>platform.classList.add('is-dragover');platform.ondragleave=()=>platform.classList.remove('is-dragover');platform.ondrop=event=>{event.preventDefault();platform.classList.remove('is-dragover');place(event.dataTransfer.getData('text/plain')||selected,+platform.dataset.platform)}});
   }
+  function announcementStage(){
+    const safeIndex=5,info=L2.stages[safeIndex],stageDone=state2.completed.includes(safeIndex);
+    const announcements=[
+      {id:'balloon',word:'ШАР',image:'balloon.png',example:'Яркий шар летит над площадью.',tone:'pink'},
+      {id:'rocket',word:'РАКЕТА',image:'rocket.png',example:'Разноцветная ракета взлетает над городом.',tone:'violet'},
+      {id:'robot',word:'РОБОТ',image:'robot.png',example:'Весёлый робот открывает праздничный парад.',tone:'aqua'},
+      {id:'cow',word:'КОРОВА',image:'cow.png',example:'Нарядная корова играет на барабане.',tone:'gold'},
+      {id:'crayfish',word:'РАК',image:'crayfish.png',example:'Красный рак держит фиолетовый шар.',tone:'rose'},
+      {id:'crow',word:'ВОРОНА',image:'crow.png',example:'Ворона несёт яркий парадный флажок.',tone:'blue'},
+      {id:'mountains',word:'ГОРЫ',image:'mountains.png',example:'Высокие горы видны далеко за городом.',tone:'mint'},
+      {id:'rainbow',word:'РАДУГА',image:'rainbow.png',example:'Над городом появилась яркая радуга.',tone:'lilac'}
+    ];
+    const current=Math.max(0,Math.min(Number(state2.stage6Current)||0,announcements.length-1)),revealed=new Set(state2.stage6Revealed||[]),done=new Set(state2.stage6Announcements||[]),item=announcements[current],isRevealed=revealed.has(current),isDone=done.has(current),allDone=done.size===announcements.length;
+    state2={...state2,currentStage:safeIndex,stage6Current:current};L2.saveProgress(state2);
+    const dots=announcements.map((announcement,i)=>`<span class="announcement-dot announcement-dot--${announcement.tone} ${done.has(i)?'is-done':''}" aria-label="Объявление ${i+1}${done.has(i)?' готово':''}">${done.has(i)?'✓':i+1}</span>`).join('');
+    set(`<section class="lesson-shell lesson-2-shell announcement-stage"><nav class="progress lesson-2-progress" aria-label="Этапы второго занятия">${L2.stages.map((stage,i)=>{const isStepDone=i<5||state2.completed.includes(i);return `<button class="step ${isStepDone?'done':''} ${i===safeIndex?'current':''}" data-step-2="${i}" ${i>state2.unlocked?'disabled':''}><b>${isStepDone?'✓':i+1}</b><span>${stage.shortTitle}</span></button>`}).join('')}</nav><div class="stage-head lesson-2-head announcement-stage__head"><span>Этап 6 из 7</span><h1>${info.title}</h1><p>Ведущему нужны объявления об участниках парада. Рассмотри картинку и составь красивое предложение.</p><small>Назови картинку → составь предложение → открой пример и повтори его.</small></div><div class="activity lesson-2-stage announcement-stage__field"><div class="announcement-progress"><strong>Объявление ${current+1} из 8</strong><div>${dots}</div></div><div class="announcement-scene"><div class="announcement-picture announcement-picture--${item.tone} ${isDone?'is-done':''}"><img src="./assets/lesson-2/participants-new/${item.image}" alt=""><span class="announcement-picture__check" aria-hidden="true">✓</span><span class="announcement-picture__decor" aria-hidden="true">✦ · 🎈 · ✧</span></div><div class="announcement-copy"><div class="announcement-microphone" aria-hidden="true"><i></i><b></b><span>♫</span></div><div class="announcement-prompts"><span>Кто? Что?</span><span>Какой? Какая? Какое?</span><span>Что делает?</span></div><p class="announcement-own">Составь своё предложение вслух.</p>${isRevealed?`<div class="announcement-example"><strong>${item.word}</strong><p>${item.example}</p><small>Повтори предложение один раз.</small></div><button class="announcement-done" data-announcement-done ${isDone?'disabled':''}>${isDone?'✓ Объявление готово':'Объявление готово'}</button>`:'<button class="announcement-reveal" data-announcement-reveal>Показать пример</button>'}${isDone&&!allDone?'<button class="announcement-next" data-announcement-next>Следующее объявление →</button>':''}${allDone?'<p class="announcement-finish">Все объявления готовы — участники могут выходить на парад!</p>':''}</div></div></div><nav class="stage-nav lesson-2-nav" aria-label="Навигация по этапам"><button class="nav-soft" data-stage-2-back>← Назад</button><button class="nav-ready" data-stage-2-ready>${stageDone?'✓ Готово':'Готово'}</button><button class="nav-soft" data-stage-2-forward>Вперёд →</button></nav></section>`,'lesson-2');
+    document.querySelectorAll('[data-step-2]').forEach(button=>button.onclick=()=>stage2(+button.dataset.step2));
+    document.querySelector('[data-stage-2-back]').onclick=()=>stage2(4);
+    document.querySelector('[data-stage-2-forward]').onclick=()=>{state2={...state2,unlocked:Math.max(state2.unlocked,6)};L2.saveProgress(state2);stage2(6)};
+    document.querySelector('[data-stage-2-ready]').onclick=()=>{if(!state2.completed.includes(5)){state2={...state2,completed:[...state2.completed,5],unlocked:Math.max(state2.unlocked,6),tasks:(state2.tasks||0)+done.size*2};L2.saveProgress(state2)}stage2(5)};
+    document.querySelector('[data-announcement-reveal]')?.addEventListener('click',()=>{revealed.add(current);state2={...state2,stage6Revealed:[...revealed]};L2.saveProgress(state2);stage2(5)});
+    document.querySelector('[data-announcement-done]')?.addEventListener('click',()=>{if(done.has(current))return;done.add(current);revealed.add(current);state2={...state2,stage6Revealed:[...revealed],stage6Announcements:[...done]};L2.saveProgress(state2);stage2(5)});
+    document.querySelector('[data-announcement-next]')?.addEventListener('click',()=>{state2={...state2,stage6Current:Math.min(current+1,announcements.length-1)};L2.saveProgress(state2);stage2(5)});
+  }
   const baseStage2=stage2;
   stage2=function(index){
+    if(index===5)return announcementStage();
     if(index===4)return participantsStage();
     if(index===3)return rehearsalStage();
     if(index===2)return fillBalloonsStage();
