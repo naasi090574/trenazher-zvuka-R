@@ -777,6 +777,301 @@ body[data-view="lesson-2"] .rhythm-drum__done:disabled {
   100% { opacity: 0; transform: translateY(-18px) scale(1); }
 }
 
+body[data-view="lesson-2"] .balloon-fill-stage__head {
+  padding-block: 10px 9px;
+}
+
+body[data-view="lesson-2"] .balloon-fill-stage__head h1 {
+  margin-block: 5px 3px;
+  color: #5722aa;
+  font-family: "Trebuchet MS", Arial, sans-serif;
+  font-weight: 900;
+}
+
+body[data-view="lesson-2"] .balloon-fill-stage__head p {
+  min-height: 0;
+  font-size: 20px;
+}
+
+body[data-view="lesson-2"] .balloon-fill-stage__head small {
+  display: block;
+  margin-top: 3px;
+  color: #684e8c;
+  font-family: "Trebuchet MS", Arial, sans-serif;
+  font-size: 18px;
+  font-weight: 700;
+}
+
+body[data-view="lesson-2"] .balloon-fill-stage__field {
+  min-height: 535px;
+  padding: 15px 30px 19px;
+}
+
+body[data-view="lesson-2"] .balloon-fill__progress {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 24px;
+  min-height: 42px;
+  color: #4e277f;
+  font-family: "Trebuchet MS", Arial, sans-serif;
+}
+
+body[data-view="lesson-2"] .balloon-fill__progress > strong {
+  font-size: 21px;
+}
+
+body[data-view="lesson-2"] .balloon-fill__progress > div {
+  display: flex;
+  gap: 9px;
+}
+
+body[data-view="lesson-2"] .balloon-fill__dot {
+  display: grid;
+  place-items: center;
+  width: 31px;
+  height: 31px;
+  border: 2px solid rgba(92, 46, 147, .24);
+  border-radius: 50%;
+  background: #f6d1e6;
+  color: #5b2e8e;
+  font-size: 13px;
+  font-weight: 900;
+  box-shadow: inset 0 3px 0 rgba(255,255,255,.48);
+}
+
+body[data-view="lesson-2"] .balloon-fill__dot--violet,
+body[data-view="lesson-2"] .balloon-fill__dot--lilac { background: #ded0f8; }
+body[data-view="lesson-2"] .balloon-fill__dot--blue,
+body[data-view="lesson-2"] .balloon-fill__dot--sky { background: #c9eaff; }
+body[data-view="lesson-2"] .balloon-fill__dot--mint,
+body[data-view="lesson-2"] .balloon-fill__dot--aqua { background: #c8f1e8; }
+body[data-view="lesson-2"] .balloon-fill__dot--gold,
+body[data-view="lesson-2"] .balloon-fill__dot--amber { background: #ffe5a9; }
+
+body[data-view="lesson-2"] .balloon-fill__dot.is-done {
+  border-color: #7441bd;
+  background: #7441bd;
+  color: #ffffff;
+  box-shadow: 0 3px 0 #4e258e;
+}
+
+body[data-view="lesson-2"] .balloon-fill__scene {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  min-height: 465px;
+  padding-top: 3px;
+}
+
+body[data-view="lesson-2"] .balloon-fill {
+  --fill-light: #ffd2eb;
+  --fill-main: #e76baa;
+  --fill-edge: #ad3e85;
+  position: relative;
+  display: flex;
+  flex: 0 0 auto;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 455px;
+  height: 385px;
+  padding: 48px 40px 54px;
+  border: 6px solid var(--fill-edge);
+  border-radius: 52% 48% 49% 51% / 57% 56% 44% 43%;
+  background: radial-gradient(circle at 31% 22%, rgba(255,255,255,.68) 0 8%, transparent 9%), linear-gradient(145deg, var(--fill-light), var(--fill-main));
+  color: #3f1e6e;
+  font-family: "Trebuchet MS", Arial, sans-serif;
+  text-align: center;
+  box-shadow: inset -24px -25px 32px rgba(81,34,118,.13), 0 12px 0 var(--fill-edge), 0 24px 38px rgba(68,35,104,.2);
+  transition: transform 420ms ease, box-shadow 420ms ease;
+}
+
+body[data-view="lesson-2"] .balloon-fill::before {
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: -25px;
+  width: 39px;
+  height: 31px;
+  background: var(--fill-edge);
+  clip-path: polygon(50% 0, 100% 100%, 0 100%);
+  transform: translateX(-50%);
+}
+
+body[data-view="lesson-2"] .balloon-fill::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: calc(100% + 23px);
+  width: 3px;
+  height: 42px;
+  background: rgba(79, 48, 106, .38);
+  transform: translateX(-50%);
+}
+
+body[data-view="lesson-2"] .balloon-fill--violet { --fill-light:#e1d4ff;--fill-main:#a27de3;--fill-edge:#7049b3; }
+body[data-view="lesson-2"] .balloon-fill--blue { --fill-light:#d5efff;--fill-main:#69bde7;--fill-edge:#3487b5; }
+body[data-view="lesson-2"] .balloon-fill--mint { --fill-light:#d3f7ed;--fill-main:#6fd5bf;--fill-edge:#319e8a; }
+body[data-view="lesson-2"] .balloon-fill--gold { --fill-light:#fff0bd;--fill-main:#f2bd58;--fill-edge:#c5862f; }
+body[data-view="lesson-2"] .balloon-fill--lilac { --fill-light:#eadcff;--fill-main:#be91e4;--fill-edge:#8754b6; }
+body[data-view="lesson-2"] .balloon-fill--aqua { --fill-light:#d2f7f8;--fill-main:#67cdd1;--fill-edge:#2e929c; }
+body[data-view="lesson-2"] .balloon-fill--rose { --fill-light:#ffd8df;--fill-main:#ef879b;--fill-edge:#bd526f; }
+body[data-view="lesson-2"] .balloon-fill--sky { --fill-light:#d8efff;--fill-main:#7fc5ef;--fill-edge:#438dbc; }
+body[data-view="lesson-2"] .balloon-fill--amber { --fill-light:#ffe6ba;--fill-main:#efa95c;--fill-edge:#bd7435; }
+
+body[data-view="lesson-2"] .balloon-fill > b {
+  position: relative;
+  z-index: 2;
+  font-size: 58px;
+  line-height: 1;
+  letter-spacing: .03em;
+  white-space: nowrap;
+}
+
+body[data-view="lesson-2"] .balloon-fill > small {
+  position: relative;
+  z-index: 2;
+  margin-top: 18px;
+  font-size: 20px;
+  font-weight: 800;
+}
+
+body[data-view="lesson-2"] .balloon-fill__shine {
+  position: absolute;
+  left: 91px;
+  top: 62px;
+  width: 58px;
+  height: 96px;
+  border-radius: 50%;
+  background: rgba(255,255,255,.28);
+  transform: rotate(28deg);
+}
+
+body[data-view="lesson-2"] .balloon-fill__check {
+  position: absolute;
+  z-index: 4;
+  right: 48px;
+  top: 51px;
+  display: grid;
+  place-items: center;
+  width: 58px;
+  height: 58px;
+  border: 4px solid #ffffff;
+  border-radius: 50%;
+  background: #6837bb;
+  color: #ffffff;
+  font-size: 37px;
+  font-weight: 900;
+  opacity: 0;
+  transform: scale(.55);
+  box-shadow: 0 6px 0 rgba(61,28,121,.35);
+  transition: opacity 240ms ease, transform 300ms ease;
+}
+
+body[data-view="lesson-2"] .balloon-fill__sparkles {
+  position: absolute;
+  z-index: 3;
+  inset: 38px auto auto 50%;
+  color: #fff8b8;
+  font-size: 25px;
+  letter-spacing: .45em;
+  opacity: 0;
+  transform: translateX(-50%);
+}
+
+body[data-view="lesson-2"] .balloon-fill.is-filled {
+  transform: translateY(-12px) scale(1.045);
+  box-shadow: inset -24px -25px 32px rgba(81,34,118,.13), 0 14px 0 var(--fill-edge), 0 0 0 9px color-mix(in srgb, var(--fill-light) 55%, transparent), 0 29px 45px rgba(68,35,104,.24);
+}
+
+body[data-view="lesson-2"] .balloon-fill.is-filled .balloon-fill__check {
+  opacity: 1;
+  transform: scale(1);
+}
+
+body[data-view="lesson-2"] .balloon-fill.is-filled .balloon-fill__sparkles {
+  animation: fill-sparkles 800ms ease;
+}
+
+body[data-view="lesson-2"] .balloon-fill__choices {
+  position: absolute;
+  left: 50%;
+  bottom: 29px;
+  z-index: 7;
+  display: grid;
+  grid-template-columns: repeat(4, 150px);
+  gap: 16px;
+  transform: translateX(-50%);
+}
+
+body[data-view="lesson-2"] .balloon-fill__choices button,
+body[data-view="lesson-2"] .balloon-fill__next {
+  min-height: 58px;
+  border: 0;
+  border-radius: 17px;
+  background: #eee4ff;
+  color: #5323a0;
+  font-family: "Trebuchet MS", Arial, sans-serif;
+  font-size: 24px;
+  font-weight: 900;
+  box-shadow: 0 6px 0 #ccb6ed;
+}
+
+body[data-view="lesson-2"] .balloon-fill__choices button:hover:not(:disabled) {
+  background: #dfcdff;
+  transform: translateY(-2px);
+}
+
+body[data-view="lesson-2"] .balloon-fill__choices button:disabled {
+  cursor: default;
+  opacity: .58;
+}
+
+body[data-view="lesson-2"] .balloon-fill__choices button.is-wrong {
+  animation: choice-shake 360ms ease;
+}
+
+body[data-view="lesson-2"] .balloon-fill__feedback {
+  position: absolute;
+  right: 35px;
+  bottom: 42px;
+  width: 270px;
+  margin: 0;
+  color: #5c3589;
+  font-family: "Trebuchet MS", Arial, sans-serif;
+  font-size: 17px;
+  font-weight: 800;
+  line-height: 1.15;
+  text-align: center;
+}
+
+body[data-view="lesson-2"] .balloon-fill__next {
+  position: absolute;
+  left: calc(50% + 354px);
+  bottom: 28px;
+  width: 230px;
+  background: #7040bc;
+  color: #ffffff;
+  box-shadow: 0 6px 0 #4a258d;
+  font-size: 18px;
+}
+
+@keyframes choice-shake {
+  0%,100% { transform: translateX(0); }
+  25% { transform: translateX(-8px); }
+  50% { transform: translateX(8px); }
+  75% { transform: translateX(-5px); }
+}
+
+@keyframes fill-sparkles {
+  0% { opacity: 0; transform: translate(-50%, 20px) scale(.7); }
+  45% { opacity: 1; transform: translate(-50%, -9px) scale(1.15); }
+  100% { opacity: 0; transform: translate(-50%, -24px) scale(1); }
+}
+
 @media (max-width: 1520px) {
   body[data-view="lesson-2"] .topbar {
     position: relative;
