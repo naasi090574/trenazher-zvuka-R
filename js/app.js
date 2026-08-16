@@ -72,32 +72,32 @@
     const safeIndex=4,info=L2.stages[safeIndex],stageDone=state2.completed.includes(safeIndex);
     const groups=[
       [
-        {id:'rocket',word:'РАКЕТА',syllables:3,image:'rocket.svg'},
-        {id:'balloon',word:'ШАР',syllables:1,image:'balloon.svg'},
-        {id:'steering-wheel',word:'РУЛЬ',syllables:1,image:'steering-wheel.svg'},
-        {id:'fish',word:'РЫБА',syllables:2,image:'fish.svg'}
+        {id:'rocket',word:'РАКЕТА',syllables:3,image:'rocket.png'},
+        {id:'balloon',word:'ШАР',syllables:1,image:'balloon.png'},
+        {id:'steering-wheel',word:'РУЛЬ',syllables:1,image:'steering-wheel.png'},
+        {id:'fish',word:'РЫБА',syllables:2,image:'fish.png'}
       ],
       [
-        {id:'cow',word:'КОРОВА',syllables:3,image:'cow.svg'},
-        {id:'crayfish',word:'РАК',syllables:1,image:'crayfish.svg'},
-        {id:'robot',word:'РОБОТ',syllables:2,image:'robot.svg'},
-        {id:'frame',word:'РАМА',syllables:2,image:'frame.svg'}
+        {id:'cow',word:'КОРОВА',syllables:3,image:'cow.png'},
+        {id:'crayfish',word:'РАК',syllables:1,image:'crayfish.png'},
+        {id:'robot',word:'РОБОТ',syllables:2,image:'robot.png'},
+        {id:'frame',word:'РАМА',syllables:2,image:'frame.png'}
       ],
       [
-        {id:'cheese',word:'СЫР',syllables:1,image:'cheese.svg'},
-        {id:'rainbow',word:'РАДУГА',syllables:3,image:'rainbow.svg'},
-        {id:'mountains',word:'ГОРЫ',syllables:2,image:'mountains.svg'},
-        {id:'crow',word:'ВОРОНА',syllables:3,image:'crow.svg'}
+        {id:'cheese',word:'СЫР',syllables:1,image:'cheese.png'},
+        {id:'rainbow',word:'РАДУГА',syllables:3,image:'rainbow.png'},
+        {id:'mountains',word:'ГОРЫ',syllables:2,image:'mountains.png'},
+        {id:'crow',word:'ВОРОНА',syllables:3,image:'crow.png'}
       ]
     ];
     const group=Math.max(0,Math.min(Number(state2.stage5Group)||0,2)),cards=groups[group],placed=new Set(state2.stage5Placed||[]),groupDone=cards.every(card=>placed.has(card.id)),allDone=groups.flat().every(card=>placed.has(card.id));
     state2={...state2,currentStage:safeIndex,stage5Group:group};L2.saveProgress(state2);
-    const deck=cards.filter(card=>!placed.has(card.id)).map((card,i)=>`<button class="participant-card" draggable="true" data-participant="${card.id}" aria-label="Картинка ${i+1}"><img src="./assets/lesson-2/participants/${card.image}" alt=""><span aria-hidden="true">✦</span></button>`).join('');
+    const deck=cards.filter(card=>!placed.has(card.id)).map((card,i)=>`<button class="participant-card" draggable="true" data-participant="${card.id}" aria-label="Картинка ${i+1}"><img src="./assets/lesson-2/participants-new/${card.image}" alt=""><span aria-hidden="true">✦</span></button>`).join('');
     const platforms=[
       {count:1,label:'1 слог',tone:'pink'},
       {count:2,label:'2 слога',tone:'aqua'},
       {count:3,label:'3 слога',tone:'gold'}
-    ].map(platform=>{const occupants=cards.filter(card=>placed.has(card.id)&&card.syllables===platform.count).map(card=>`<span class="participant-placed"><img src="./assets/lesson-2/participants/${card.image}" alt=""><b>${card.word}</b><i aria-hidden="true">✓</i></span>`).join('');return `<button class="parade-platform parade-platform--${platform.tone}" data-platform="${platform.count}"><span class="parade-platform__decor" aria-hidden="true">★ · ✦ · ★</span><strong>${platform.label}</strong><span class="parade-platform__occupants">${occupants}</span></button>`}).join('');
+    ].map(platform=>{const occupants=cards.filter(card=>placed.has(card.id)&&card.syllables===platform.count).map(card=>`<span class="participant-placed"><img src="./assets/lesson-2/participants-new/${card.image}" alt=""><b>${card.word}</b><i aria-hidden="true">✓</i></span>`).join('');return `<button class="parade-platform parade-platform--${platform.tone}" data-platform="${platform.count}"><span class="parade-platform__decor" aria-hidden="true">★ · ✦ · ★</span><strong>${platform.label}</strong><span class="parade-platform__occupants">${occupants}</span></button>`}).join('');
     set(`<section class="lesson-shell lesson-2-shell participants-stage"><nav class="progress lesson-2-progress" aria-label="Этапы второго занятия">${L2.stages.map((item,i)=>{const isDone=i<4||state2.completed.includes(i);return `<button class="step ${isDone?'done':''} ${i===safeIndex?'current':''}" data-step-2="${i}" ${i>state2.unlocked?'disabled':''}><b>${isDone?'✓':i+1}</b><span>${item.shortTitle}</span></button>`}).join('')}</nav><div class="stage-head lesson-2-head participants-stage__head"><span>Этап 5 из 7</span><h1>${info.title}</h1><p>Участники парада перепутали свои места. Назови картинку и определи количество слогов в слове.</p><small>Перенеси картинку на подходящую парадную платформу.</small></div><div class="activity lesson-2-stage participants-stage__field"><div class="participants-stage__top"><strong>Группа ${group+1} из 3</strong><p data-participant-hint aria-live="polite">${allDone?'Все участники заняли свои места!':' '}</p>${groupDone&&!allDone?'<button data-next-group>Следующая группа →</button>':''}</div><div class="participant-deck">${deck||'<span class="participant-deck__ready">Все картинки распределены</span>'}</div><div class="parade-platforms">${platforms}</div></div><nav class="stage-nav lesson-2-nav" aria-label="Навигация по этапам"><button class="nav-soft" data-stage-2-back>← Назад</button><button class="nav-ready" data-stage-2-ready>${stageDone?'✓ Готово':'Готово'}</button><button class="nav-soft" data-stage-2-forward>Вперёд →</button></nav></section>`,'lesson-2');
     document.querySelectorAll('[data-step-2]').forEach(button=>button.onclick=()=>stage2(+button.dataset.step2));
     document.querySelector('[data-stage-2-back]').onclick=()=>stage2(3);
