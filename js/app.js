@@ -47,8 +47,30 @@
     document.querySelectorAll('[data-balloon-choice]').forEach(button=>button.onclick=()=>{if(button.dataset.balloonChoice!==word.answer){button.classList.remove('is-wrong');void button.offsetWidth;button.classList.add('is-wrong');document.querySelector('[data-balloon-feedback]').textContent='Попробуй ещё';return}done.add(current);state2={...state2,stage3Words:[...done],stage3Current:current};L2.saveProgress(state2);const balloon=document.querySelector('[data-fill-balloon]');balloon.classList.add('is-filled');document.querySelector('[data-balloon-word]').textContent=word.word;balloon.querySelector('small').textContent='Произнеси слово два раза';document.querySelectorAll('[data-balloon-choice]').forEach(item=>item.disabled=true);document.querySelector('[data-balloon-feedback]').textContent=done.size===words.length?'Все шары наполнены и готовы к параду!':' ';setTimeout(()=>stage2(2),520)});
     document.querySelector('[data-balloon-next]')?.addEventListener('click',()=>{state2={...state2,stage3Current:Math.min(current+1,words.length-1)};L2.saveProgress(state2);stage2(2)});
   }
+  function rehearsalStage(){
+    const safeIndex=3,info=L2.stages[safeIndex],stageDone=state2.completed.includes(safeIndex);
+    const chants=[
+      {syllables:'РА-РА-РА',line:'начинается игра.',tone:'pink',icon:'★'},
+      {syllables:'РО-РО-РО',line:'у Ромы новое ведро.',tone:'lilac',icon:'🎈'},
+      {syllables:'РУ-РУ-РУ',line:'красный шар дарю Петру.',tone:'mint',icon:'✦'},
+      {syllables:'РЫ-РЫ-РЫ',line:'над площадью летят шары.',tone:'blue',icon:'🎀'},
+      {syllables:'АР-АР-АР',line:'ярко светит наш фонарь.',tone:'peach',icon:'★'},
+      {syllables:'ОР-ОР-ОР',line:'барабанит громко Егор.',tone:'yellow',icon:'♫'}
+    ];
+    const opened=new Set(state2.stage4Opened||[]),done=new Set(state2.stage4Chants||[]),allDone=done.size===chants.length;
+    state2={...state2,currentStage:safeIndex};L2.saveProgress(state2);
+    const flags=chants.map((chant,i)=>`<article class="rehearsal-flag rehearsal-flag--${chant.tone} ${opened.has(i)?'is-open':''} ${done.has(i)?'is-done':''}" data-rehearsal-flag="${i}"><span class="rehearsal-flag__check" aria-hidden="true">✓</span><span class="rehearsal-flag__pin" aria-hidden="true"></span>${opened.has(i)?`<div class="rehearsal-flag__content"><strong>${chant.syllables}</strong><p>${chant.line}</p><button data-chant-done="${i}" ${done.has(i)?'disabled':''}>${done.has(i)?'Произнесено дважды':'Произнесено дважды'}</button></div>`:`<button class="rehearsal-flag__closed" data-flag-open="${i}"><b>${i+1}</b><span>${chant.icon}</span><strong>Открыть речёвку</strong></button>`}<span class="rehearsal-flag__sparkles" aria-hidden="true">✦ ✧</span></article>`).join('');
+    set(`<section class="lesson-shell lesson-2-shell rehearsal-stage"><nav class="progress lesson-2-progress" aria-label="Этапы второго занятия">${L2.stages.map((item,i)=>{const isDone=i<3||state2.completed.includes(i);return `<button class="step ${isDone?'done':''} ${i===safeIndex?'current':''}" data-step-2="${i}" ${i>state2.unlocked?'disabled':''}><b>${isDone?'✓':i+1}</b><span>${item.shortTitle}</span></button>`}).join('')}</nav><div class="stage-head lesson-2-head rehearsal-stage__head"><span>Этап 4 из 7</span><h1>${info.title}</h1><p>Перед началом парада нужно отрепетировать праздничные речёвки.</p><small>Открой флажок и произнеси чистоговорку два раза.</small></div><div class="activity lesson-2-stage rehearsal-stage__field"><div class="rehearsal-garland" aria-hidden="true"><i></i></div><div class="rehearsal-flags">${flags}</div><p class="rehearsal-stage__message" aria-live="polite">${allDone?'Речёвки готовы — репетиция завершена!':' '}</p></div><nav class="stage-nav lesson-2-nav" aria-label="Навигация по этапам"><button class="nav-soft" data-stage-2-back>← Назад</button><button class="nav-ready" data-stage-2-ready>${stageDone?'✓ Готово':'Готово'}</button><button class="nav-soft" data-stage-2-forward>Вперёд →</button></nav></section>`,'lesson-2');
+    document.querySelectorAll('[data-step-2]').forEach(button=>button.onclick=()=>stage2(+button.dataset.step2));
+    document.querySelector('[data-stage-2-back]').onclick=()=>stage2(2);
+    document.querySelector('[data-stage-2-forward]').onclick=()=>{state2={...state2,unlocked:Math.max(state2.unlocked,4)};L2.saveProgress(state2);stage2(4)};
+    document.querySelector('[data-stage-2-ready]').onclick=()=>{if(!state2.completed.includes(3)){state2={...state2,completed:[...state2.completed,3],unlocked:Math.max(state2.unlocked,4),tasks:(state2.tasks||0)+done.size*2};L2.saveProgress(state2)}stage2(3)};
+    document.querySelectorAll('[data-flag-open]').forEach(button=>button.onclick=()=>{opened.add(+button.dataset.flagOpen);state2={...state2,stage4Opened:[...opened]};L2.saveProgress(state2);stage2(3)});
+    document.querySelectorAll('[data-chant-done]').forEach(button=>button.onclick=()=>{const flag=+button.dataset.chantDone;if(done.has(flag))return;done.add(flag);opened.add(flag);state2={...state2,stage4Opened:[...opened],stage4Chants:[...done]};L2.saveProgress(state2);stage2(3)});
+  }
   const baseStage2=stage2;
   stage2=function(index){
+    if(index===3)return rehearsalStage();
     if(index===2)return fillBalloonsStage();
     if(index!==1)return baseStage2(index);
     const safeIndex=1,info=L2.stages[safeIndex],stageDone=state2.completed.includes(safeIndex);

@@ -1072,6 +1072,278 @@ body[data-view="lesson-2"] .balloon-fill__next {
   100% { opacity: 0; transform: translate(-50%, -24px) scale(1); }
 }
 
+body[data-view="lesson-2"] .rehearsal-stage__head {
+  padding-block: 10px 9px;
+}
+
+body[data-view="lesson-2"] .rehearsal-stage__head h1 {
+  margin-block: 5px 3px;
+  color: #5722aa;
+  font-family: "Trebuchet MS", Arial, sans-serif;
+  font-weight: 900;
+}
+
+body[data-view="lesson-2"] .rehearsal-stage__head p {
+  min-height: 0;
+  font-size: 20px;
+}
+
+body[data-view="lesson-2"] .rehearsal-stage__head small {
+  display: block;
+  margin-top: 3px;
+  color: #684e8c;
+  font-family: "Trebuchet MS", Arial, sans-serif;
+  font-size: 18px;
+  font-weight: 700;
+}
+
+body[data-view="lesson-2"] .rehearsal-stage__field {
+  position: relative;
+  min-height: 535px;
+  padding: 30px 32px 17px;
+  overflow: hidden;
+}
+
+body[data-view="lesson-2"] .rehearsal-garland,
+body[data-view="lesson-2"] .rehearsal-garland::after {
+  position: absolute;
+  left: 4%;
+  right: 4%;
+  top: 36px;
+  height: 5px;
+  border-radius: 999px;
+  background: linear-gradient(90deg, #7c45bd, #e06cae 24%, #4ab6b4 50%, #709fd9 72%, #d49b43);
+  box-shadow: 0 3px 0 rgba(70, 32, 115, .14);
+}
+
+body[data-view="lesson-2"] .rehearsal-garland::after {
+  content: "";
+  left: 0;
+  right: 0;
+  top: 235px;
+}
+
+body[data-view="lesson-2"] .rehearsal-flags {
+  position: relative;
+  z-index: 2;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 29px 24px;
+  max-width: 1460px;
+  margin: 0 auto;
+}
+
+body[data-view="lesson-2"] .rehearsal-flag {
+  --flag-light: #ffd9ea;
+  --flag-main: #f1a6ca;
+  --flag-edge: #c85f97;
+  position: relative;
+  width: 100%;
+  max-width: 470px;
+  height: 205px;
+  justify-self: center;
+  padding: 27px 24px 35px;
+  border: 4px solid var(--flag-edge);
+  border-radius: 24px 24px 34px 34px;
+  background: linear-gradient(135deg, rgba(255,255,255,.58), transparent 31%), linear-gradient(155deg, var(--flag-light), var(--flag-main));
+  color: #43206f;
+  font-family: "Trebuchet MS", Arial, sans-serif;
+  text-align: center;
+  box-shadow: 0 9px 0 color-mix(in srgb, var(--flag-edge) 68%, #62338e), 0 17px 27px rgba(66,34,105,.16);
+  transform-origin: 50% 0;
+  transition: transform 300ms ease, box-shadow 300ms ease, border-color 220ms ease;
+}
+
+body[data-view="lesson-2"] .rehearsal-flag::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: -4px;
+  width: 70px;
+  height: 31px;
+  background: rgba(255,255,255,.88);
+  clip-path: polygon(0 100%, 50% 0, 100% 100%);
+  transform: translateX(-50%);
+}
+
+body[data-view="lesson-2"] .rehearsal-flag--lilac { --flag-light:#e9dcff;--flag-main:#c3a0ea;--flag-edge:#8d68c7; }
+body[data-view="lesson-2"] .rehearsal-flag--mint { --flag-light:#d1f5eb;--flag-main:#7ed9c7;--flag-edge:#42a99a; }
+body[data-view="lesson-2"] .rehearsal-flag--blue { --flag-light:#d7eeff;--flag-main:#8bc9ed;--flag-edge:#4e93bd; }
+body[data-view="lesson-2"] .rehearsal-flag--peach { --flag-light:#ffe1ce;--flag-main:#f3b48d;--flag-edge:#cf7d58; }
+body[data-view="lesson-2"] .rehearsal-flag--yellow { --flag-light:#fff3bf;--flag-main:#efd376;--flag-edge:#c49b3d; }
+
+body[data-view="lesson-2"] .rehearsal-flag:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 0 color-mix(in srgb, var(--flag-edge) 68%, #62338e), 0 22px 31px rgba(66,34,105,.2);
+}
+
+body[data-view="lesson-2"] .rehearsal-flag.is-open {
+  animation: flag-unfold 430ms ease;
+}
+
+body[data-view="lesson-2"] .rehearsal-flag.is-done {
+  border-color: color-mix(in srgb, var(--flag-edge) 75%, #6b2ab4);
+  background: linear-gradient(135deg, rgba(255,255,255,.58), transparent 31%), linear-gradient(155deg, var(--flag-light), var(--flag-main));
+  box-shadow: 0 10px 0 var(--flag-edge), 0 0 0 5px color-mix(in srgb, var(--flag-edge) 20%, transparent), 0 20px 31px rgba(66,34,105,.2);
+}
+
+body[data-view="lesson-2"] .rehearsal-flag__pin {
+  position: absolute;
+  z-index: 5;
+  left: 50%;
+  top: -19px;
+  width: 32px;
+  height: 32px;
+  border: 7px solid #f3cd6c;
+  border-radius: 50%;
+  background: #7040b7;
+  box-shadow: 0 4px 0 rgba(76,37,126,.28);
+  transform: translateX(-50%);
+}
+
+body[data-view="lesson-2"] .rehearsal-flag__closed {
+  display: grid;
+  grid-template-columns: 80px 55px 1fr;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  padding: 8px 7px 18px;
+  border: 0;
+  background: transparent;
+  color: #43206f;
+  font-family: "Trebuchet MS", Arial, sans-serif;
+}
+
+body[data-view="lesson-2"] .rehearsal-flag__closed b {
+  display: grid;
+  place-items: center;
+  width: 68px;
+  height: 68px;
+  border: 4px solid rgba(255,255,255,.86);
+  border-radius: 50%;
+  background: var(--flag-edge);
+  color: #ffffff;
+  font-size: 34px;
+  box-shadow: 0 5px 0 rgba(76,37,126,.24);
+}
+
+body[data-view="lesson-2"] .rehearsal-flag__closed > span {
+  font-size: 32px;
+}
+
+body[data-view="lesson-2"] .rehearsal-flag__closed > strong {
+  font-size: 23px;
+  line-height: 1.12;
+}
+
+body[data-view="lesson-2"] .rehearsal-flag__content {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  padding-bottom: 10px;
+}
+
+body[data-view="lesson-2"] .rehearsal-flag__content > strong {
+  color: #5922a3;
+  font-size: 31px;
+  font-weight: 900;
+  line-height: 1;
+  white-space: nowrap;
+}
+
+body[data-view="lesson-2"] .rehearsal-flag__content p {
+  min-height: 29px;
+  margin: 8px 0 10px;
+  font-size: 21px;
+  font-weight: 800;
+  line-height: 1.15;
+  white-space: nowrap;
+}
+
+body[data-view="lesson-2"] .rehearsal-flag__content button {
+  min-width: 215px;
+  min-height: 42px;
+  padding: 7px 17px;
+  border: 2px solid #ffffff;
+  border-radius: 999px;
+  background: #7040bc;
+  color: #ffffff;
+  font-family: "Trebuchet MS", Arial, sans-serif;
+  font-size: 15px;
+  font-weight: 900;
+  box-shadow: 0 4px 0 rgba(66,31,111,.32);
+}
+
+body[data-view="lesson-2"] .rehearsal-flag__content button:disabled {
+  opacity: .76;
+}
+
+body[data-view="lesson-2"] .rehearsal-flag__check {
+  position: absolute;
+  z-index: 7;
+  right: 13px;
+  top: 12px;
+  display: grid;
+  place-items: center;
+  width: 45px;
+  height: 45px;
+  border: 3px solid #ffffff;
+  border-radius: 50%;
+  background: #6937ba;
+  color: #ffffff;
+  font-size: 29px;
+  font-weight: 900;
+  opacity: 0;
+  transform: scale(.55);
+  box-shadow: 0 5px 0 rgba(62,28,117,.3);
+  transition: opacity 180ms ease, transform 220ms ease;
+}
+
+body[data-view="lesson-2"] .rehearsal-flag.is-done .rehearsal-flag__check {
+  opacity: 1;
+  transform: scale(1);
+}
+
+body[data-view="lesson-2"] .rehearsal-flag__sparkles {
+  position: absolute;
+  z-index: 4;
+  left: 17px;
+  top: 12px;
+  color: #fff9a7;
+  font-size: 21px;
+  opacity: 0;
+}
+
+body[data-view="lesson-2"] .rehearsal-flag.is-open .rehearsal-flag__sparkles {
+  animation: flag-sparkles 700ms ease;
+}
+
+body[data-view="lesson-2"] .rehearsal-stage__message {
+  min-height: 25px;
+  margin: 18px 0 0;
+  color: #5b2b9c;
+  font-family: "Trebuchet MS", Arial, sans-serif;
+  font-size: 20px;
+  font-weight: 900;
+  text-align: center;
+}
+
+@keyframes flag-unfold {
+  0% { transform: perspective(650px) rotateX(-18deg) scaleY(.76); opacity: .72; }
+  65% { transform: perspective(650px) rotateX(4deg) scaleY(1.03); opacity: 1; }
+  100% { transform: perspective(650px) rotateX(0) scaleY(1); }
+}
+
+@keyframes flag-sparkles {
+  0% { opacity: 0; transform: translateY(10px) scale(.7); }
+  45% { opacity: 1; transform: translateY(-7px) scale(1.15); }
+  100% { opacity: 0; transform: translateY(-18px) scale(1); }
+}
+
 @media (max-width: 1520px) {
   body[data-view="lesson-2"] .topbar {
     position: relative;
