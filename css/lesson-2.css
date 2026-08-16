@@ -1344,6 +1344,262 @@ body[data-view="lesson-2"] .rehearsal-stage__message {
   100% { opacity: 0; transform: translateY(-18px) scale(1); }
 }
 
+body[data-view="lesson-2"] .participants-stage__head {
+  padding-block: 9px 8px;
+}
+
+body[data-view="lesson-2"] .participants-stage__head h1 {
+  margin-block: 4px 2px;
+  color: #5722aa;
+  font-family: "Trebuchet MS", Arial, sans-serif;
+  font-weight: 900;
+}
+
+body[data-view="lesson-2"] .participants-stage__head p {
+  min-height: 0;
+  font-size: 19px;
+}
+
+body[data-view="lesson-2"] .participants-stage__head small {
+  display: block;
+  margin-top: 3px;
+  color: #684e8c;
+  font-family: "Trebuchet MS", Arial, sans-serif;
+  font-size: 17px;
+  font-weight: 700;
+}
+
+body[data-view="lesson-2"] .participants-stage__field {
+  min-height: 535px;
+  padding: 14px 28px 20px;
+}
+
+body[data-view="lesson-2"] .participants-stage__top {
+  display: grid;
+  grid-template-columns: 230px 1fr 250px;
+  align-items: center;
+  min-height: 48px;
+  color: #4f2782;
+  font-family: "Trebuchet MS", Arial, sans-serif;
+}
+
+body[data-view="lesson-2"] .participants-stage__top > strong {
+  font-size: 22px;
+}
+
+body[data-view="lesson-2"] .participants-stage__top p {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 900;
+  text-align: center;
+}
+
+body[data-view="lesson-2"] .participants-stage__top button {
+  min-height: 46px;
+  padding: 8px 18px;
+  border: 0;
+  border-radius: 15px;
+  background: #7040bc;
+  color: #ffffff;
+  font-family: "Trebuchet MS", Arial, sans-serif;
+  font-size: 17px;
+  font-weight: 900;
+  box-shadow: 0 5px 0 #4b278c;
+}
+
+body[data-view="lesson-2"] .participant-deck {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 32px;
+  min-height: 210px;
+  padding: 7px 20px 11px;
+}
+
+body[data-view="lesson-2"] .participant-card {
+  position: relative;
+  width: 195px;
+  height: 195px;
+  padding: 10px;
+  border: 4px solid #d7c4ef;
+  border-radius: 27px;
+  background: #ffffff;
+  box-shadow: 0 8px 0 #bba1dc, 0 16px 25px rgba(66,34,105,.16);
+  transition: transform 180ms ease, border-color 180ms ease, box-shadow 180ms ease;
+}
+
+body[data-view="lesson-2"] .participant-card:hover,
+body[data-view="lesson-2"] .participant-card.is-selected {
+  border-color: #7540c1;
+  transform: translateY(-5px);
+  box-shadow: 0 11px 0 #8c67be, 0 21px 29px rgba(66,34,105,.2);
+}
+
+body[data-view="lesson-2"] .participant-card.is-dragging {
+  opacity: .56;
+  transform: scale(.94);
+}
+
+body[data-view="lesson-2"] .participant-card.is-wrong {
+  animation: participant-shake 360ms ease;
+}
+
+body[data-view="lesson-2"] .participant-card img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  border-radius: 19px;
+  object-fit: contain;
+}
+
+body[data-view="lesson-2"] .participant-card > span {
+  position: absolute;
+  right: 14px;
+  top: 11px;
+  color: #ffffff;
+  font-size: 21px;
+  text-shadow: 0 2px 5px rgba(73,35,112,.45);
+}
+
+body[data-view="lesson-2"] .participant-deck__ready {
+  color: #684294;
+  font-family: "Trebuchet MS", Arial, sans-serif;
+  font-size: 22px;
+  font-weight: 900;
+}
+
+body[data-view="lesson-2"] .parade-platforms {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 24px;
+  max-width: 1500px;
+  margin: 0 auto;
+}
+
+body[data-view="lesson-2"] .parade-platform {
+  --platform-light: #f5c9e5;
+  --platform-main: #b966c5;
+  --platform-edge: #74399b;
+  position: relative;
+  display: grid;
+  grid-template-rows: 35px 1fr;
+  min-height: 195px;
+  padding: 16px 18px 17px;
+  border: 5px solid var(--platform-edge);
+  border-radius: 27px 27px 18px 18px;
+  background: linear-gradient(145deg, rgba(255,255,255,.54), transparent 29%), linear-gradient(155deg, var(--platform-light), var(--platform-main));
+  color: #ffffff;
+  font-family: "Trebuchet MS", Arial, sans-serif;
+  box-shadow: 0 11px 0 color-mix(in srgb, var(--platform-edge) 72%, #40225f), 0 19px 29px rgba(64,31,99,.19);
+  transition: transform 180ms ease, box-shadow 180ms ease;
+}
+
+body[data-view="lesson-2"] .parade-platform::before,
+body[data-view="lesson-2"] .parade-platform::after {
+  content: "";
+  position: absolute;
+  bottom: -20px;
+  width: 58px;
+  height: 26px;
+  border-radius: 0 0 15px 15px;
+  background: var(--platform-edge);
+}
+
+body[data-view="lesson-2"] .parade-platform::before { left: 38px; }
+body[data-view="lesson-2"] .parade-platform::after { right: 38px; }
+
+body[data-view="lesson-2"] .parade-platform--aqua { --platform-light:#c7f0ec;--platform-main:#58bdd0;--platform-edge:#277f9b; }
+body[data-view="lesson-2"] .parade-platform--gold { --platform-light:#eee1ff;--platform-main:#d8ae65;--platform-edge:#8a5a9d; }
+
+body[data-view="lesson-2"] .parade-platform:hover,
+body[data-view="lesson-2"] .parade-platform.is-dragover {
+  transform: translateY(-4px);
+  box-shadow: 0 14px 0 color-mix(in srgb, var(--platform-edge) 72%, #40225f), 0 0 0 7px color-mix(in srgb, var(--platform-light) 45%, transparent), 0 24px 34px rgba(64,31,99,.22);
+}
+
+body[data-view="lesson-2"] .parade-platform > strong {
+  position: relative;
+  z-index: 2;
+  font-size: 25px;
+  font-weight: 900;
+  text-shadow: 0 2px 3px rgba(52,25,84,.24);
+}
+
+body[data-view="lesson-2"] .parade-platform__decor {
+  position: absolute;
+  inset: 11px 15px auto auto;
+  color: #fff6a7;
+  font-size: 16px;
+  letter-spacing: .15em;
+}
+
+body[data-view="lesson-2"] .parade-platform__occupants {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 13px;
+  min-height: 118px;
+}
+
+body[data-view="lesson-2"] .participant-placed {
+  position: relative;
+  display: grid;
+  grid-template-columns: 76px auto;
+  align-items: center;
+  min-width: 150px;
+  min-height: 96px;
+  padding: 7px 10px 7px 7px;
+  border: 3px solid rgba(255,255,255,.88);
+  border-radius: 18px;
+  background: rgba(255,255,255,.86);
+  color: #4a2778;
+  box-shadow: 0 5px 10px rgba(55,27,88,.18);
+  animation: participant-arrive 420ms ease;
+}
+
+body[data-view="lesson-2"] .participant-placed img {
+  width: 70px;
+  height: 70px;
+  border-radius: 13px;
+  object-fit: contain;
+}
+
+body[data-view="lesson-2"] .participant-placed b {
+  font-size: 16px;
+  font-weight: 900;
+}
+
+body[data-view="lesson-2"] .participant-placed i {
+  position: absolute;
+  right: -8px;
+  top: -10px;
+  display: grid;
+  place-items: center;
+  width: 31px;
+  height: 31px;
+  border: 3px solid #ffffff;
+  border-radius: 50%;
+  background: #6536b7;
+  color: #ffffff;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 900;
+  box-shadow: 0 3px 0 rgba(55,25,103,.3);
+}
+
+@keyframes participant-shake {
+  0%,100% { transform: translateX(0); }
+  25% { transform: translateX(-8px); }
+  50% { transform: translateX(8px); }
+  75% { transform: translateX(-5px); }
+}
+
+@keyframes participant-arrive {
+  0% { opacity: 0; transform: translateY(-22px) scale(.82); }
+  70% { opacity: 1; transform: translateY(4px) scale(1.04); }
+  100% { transform: translateY(0) scale(1); }
+}
+
 @media (max-width: 1520px) {
   body[data-view="lesson-2"] .topbar {
     position: relative;
