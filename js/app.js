@@ -133,8 +133,40 @@
     document.querySelector('[data-announcement-done]')?.addEventListener('click',()=>{if(done.has(current))return;done.add(current);revealed.add(current);state2={...state2,stage6Revealed:[...revealed],stage6Announcements:[...done]};L2.saveProgress(state2);stage2(5)});
     document.querySelector('[data-announcement-next]')?.addEventListener('click',()=>{state2={...state2,stage6Current:Math.min(current+1,announcements.length-1)};L2.saveProgress(state2);stage2(5)});
   }
+  function finishLesson2(){
+    const balloons=Array.from({length:14},(_,i)=>`<i class="lesson-2-final__balloon lesson-2-final__balloon--${i%7}" style="--i:${i}" aria-hidden="true"></i>`).join('');
+    set(`<section class="lesson-2-final"><div class="lesson-2-final__sky" aria-hidden="true">${balloons}</div><div class="lesson-2-final__confetti" aria-hidden="true">✦ · ★ · ✧ · ● · ✦ · ★ · ✧</div><div class="lesson-2-final__panel"><span>Праздничный парад</span><h1>ПАРАД НАЧИНАЕТСЯ!</h1><p>Все участники готовы! Все задания выполнены — парад воздушных шаров начинается!</p><div class="lesson-2-final__actions"><button data-final-home>← Все занятия</button><button data-final-again>Пройти ещё раз</button></div></div></section>`,'lesson-2-final');
+    document.querySelector('[data-final-home]').onclick=()=>{location.hash='home'};
+    document.querySelector('[data-final-again]').onclick=()=>{if(!window.confirm('Сбросить прогресс занятия «Парад воздушных шаров» и пройти его ещё раз?'))return;localStorage.removeItem(L2.progressKey);state2=L2.loadProgress();location.hash='lesson-2';cover2()};
+  }
+  function launchStage(){
+    const safeIndex=6,info=L2.stages[safeIndex],stageDone=state2.completed.includes(safeIndex);
+    const tasks=[
+      'КРАСНЫЙ ШАР',
+      'ЯРКАЯ РАДУГА',
+      'ПРАЗДНИЧНЫЙ БАРАБАН',
+      'РАЗНОЦВЕТНАЯ РАКЕТА',
+      'РОМА ДЕРЖИТ ФИОЛЕТОВЫЙ ШАР.',
+      'РОБОТ ГРОМКО ИГРАЕТ НА БАРАБАНЕ.',
+      'ВОРОНА ПРОЛЕТАЕТ НАД ГОРОДСКОЙ ПЛОЩАДЬЮ.',
+      'РАЗНОЦВЕТНЫЕ ШАРЫ ПОДНИМАЮТСЯ НАД ГОРОДОМ.',
+      'НА ПАРАДЕ РОМА УВИДЕЛ РОБОТА, КОРОВУ И КРАСНОГО РАКА.',
+      'ЯРКИЕ РАКЕТЫ И РАЗНОЦВЕТНЫЕ ШАРЫ УКРАСИЛИ ПРАЗДНИЧНЫЙ ГОРОД.'
+    ];
+    const current=Math.max(0,Math.min(Number(state2.stage7Current)||0,tasks.length-1)),launched=new Set(state2.stage7Launched||[]),allLaunched=launched.size===tasks.length,level=current<4?'short':current<8?'medium':'long';
+    state2={...state2,currentStage:safeIndex,stage7Current:current};L2.saveProgress(state2);
+    const skyBalloons=tasks.map((task,i)=>`<span class="launch-balloon launch-balloon--${i} ${launched.has(i)?'is-launched':''} ${i===current&&!launched.has(i)?'is-current':''}" data-launch-balloon="${i}" aria-hidden="true"><i></i></span>`).join('');
+    const dots=tasks.map((task,i)=>`<span class="launch-dot launch-dot--${i} ${launched.has(i)?'is-done':''}" aria-label="Запуск ${i+1}${launched.has(i)?' выполнен':''}">${launched.has(i)?'✓':i+1}</span>`).join('');
+    set(`<section class="lesson-shell lesson-2-shell launch-stage"><nav class="progress lesson-2-progress" aria-label="Этапы второго занятия">${L2.stages.map((stage,i)=>{const isStepDone=i<6||state2.completed.includes(i);return `<button class="step ${isStepDone?'done':''} ${i===safeIndex?'current':''}" data-step-2="${i}" ${i>state2.unlocked?'disabled':''}><b>${isStepDone?'✓':i+1}</b><span>${stage.shortTitle}</span></button>`}).join('')}</nav><div class="stage-head lesson-2-head launch-stage__head"><span>Этап 7 из 7</span><h1>${info.title}</h1><p>Всё готово к началу парада. Произнеси праздничные фразы и запусти воздушные шары в небо.</p><small>Прочитай задание два раза и нажми «Запустить шар».</small></div><div class="activity lesson-2-stage launch-stage__field"><div class="launch-progress"><strong>Запуск ${current+1} из 10</strong><div>${dots}</div></div><div class="launch-sky"><span class="launch-cloud launch-cloud--left" aria-hidden="true"></span><span class="launch-cloud launch-cloud--right" aria-hidden="true"></span><div class="launch-bunting" aria-hidden="true">▼ ▼ ▼ ▼ ▼ ▼ ▼ ▼</div><div class="launch-balloons">${skyBalloons}</div></div><div class="launch-card launch-card--${level}"><span class="launch-card__sparkles" aria-hidden="true">✦ · ✧ · ★</span><p>${tasks[current]}</p>${allLaunched?'<strong>Все воздушные шары запущены!</strong>':`<button data-launch-current>Запустить шар</button>`}</div></div><nav class="stage-nav lesson-2-nav" aria-label="Навигация по этапам"><button class="nav-soft" data-stage-2-back>← Назад</button><button class="nav-ready" data-stage-2-ready>${stageDone?'✓ Готово':'Готово'}</button><button class="nav-soft" data-stage-2-finish>Завершить занятие →</button></nav></section>`,'lesson-2');
+    document.querySelectorAll('[data-step-2]').forEach(button=>button.onclick=()=>stage2(+button.dataset.step2));
+    document.querySelector('[data-stage-2-back]').onclick=()=>stage2(5);
+    document.querySelector('[data-stage-2-ready]').onclick=()=>{if(!state2.completed.includes(6)){state2={...state2,completed:[...state2.completed,6],unlocked:6,tasks:(state2.tasks||0)+launched.size*2};L2.saveProgress(state2)}stage2(6)};
+    document.querySelector('[data-stage-2-finish]').onclick=()=>{if(!state2.completed.includes(6))state2={...state2,completed:[...state2.completed,6],unlocked:6,tasks:(state2.tasks||0)+launched.size*2,finished:true};else state2={...state2,finished:true};L2.saveProgress(state2);finishLesson2()};
+    document.querySelector('[data-launch-current]')?.addEventListener('click',button=>{if(launched.has(current))return;launched.add(current);state2={...state2,stage7Launched:[...launched],stage7Current:Math.min(current+1,tasks.length-1)};L2.saveProgress(state2);button.currentTarget.disabled=true;document.querySelector(`[data-launch-balloon="${current}"]`)?.classList.add('is-launching');setTimeout(()=>stage2(6),520)});
+  }
   const baseStage2=stage2;
   stage2=function(index){
+    if(index===6)return launchStage();
     if(index===5)return announcementStage();
     if(index===4)return participantsStage();
     if(index===3)return rehearsalStage();
