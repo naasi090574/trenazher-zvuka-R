@@ -1,0 +1,113 @@
+body[data-view="lesson"] .riddle {
+  width: min(100%, 920px);
+  max-width: 920px;
+  min-height: 330px;
+  display: flex;
+  flex-direction: column;
+}
+
+body[data-view="lesson"] .riddle-content {
+  flex: 1;
+  display: grid;
+  place-items: center;
+  min-height: 235px;
+  padding: 10px 20px 24px;
+}
+
+body[data-view="lesson"] .riddle-description {
+  width: min(100%, 760px);
+  margin: 0 auto;
+  color: #43216f;
+  font-family: "Adigiana Extreme", sans-serif;
+  font-size: clamp(28px, 2.5vw, 30px);
+  font-weight: normal;
+  line-height: 1.4;
+}
+
+body[data-view="lesson"] .riddle-actions {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  flex-wrap: wrap;
+  padding-top: 18px;
+  border-top: 1px solid #e8ddf6;
+}
+
+body[data-view="lesson"] .riddle-actions button {
+  min-height: 42px;
+  margin: 0;
+  padding: 10px 17px;
+  border: 0;
+  border-radius: 13px;
+  background: #eee5ff;
+  color: #5427a8;
+  font-size: 15px;
+  box-shadow: 0 4px 0 #cfb9ec;
+}
+
+body[data-view="lesson"] .riddle-actions .next {
+  margin-left: auto;
+}
+
+body[data-view="lesson"] .answer {
+  width: 100%;
+}
+
+body[data-view="lesson"] .answer .picture {
+  width: min(70%, 560px);
+  max-width: 560px;
+  min-height: 405px;
+  margin: 0 auto;
+  gap: 6px;
+  background: transparent;
+}
+
+body[data-view="lesson"] .answer .picture img {
+  width: 100%;
+  height: 340px;
+  object-fit: contain;
+  transform: scale(1.16);
+  transform-origin: center;
+}
+
+body[data-view="lesson"] .answer .picture em {
+  position: relative;
+  z-index: 1;
+  color: #43216f;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: clamp(26px, 2.5vw, 30px);
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+body[data-view="lesson"] .answer img[src$="02-raketa.png"] { transform: scale(1.24); }
+body[data-view="lesson"] .answer img[src$="04-ranets.png"] { transform: scale(1.3); }
+body[data-view="lesson"] .answer img[src$="05-robot.png"] { transform: scale(1.3); }
+body[data-view="lesson"] .answer img[src$="07-romashka.png"] { transform: scale(1.22); }
+body[data-view="lesson"] .answer img[src$="14-rybak.png"] { transform: scale(1.32); }
+body[data-view="lesson"] .answer img[src$="16-rynok.png"] { transform: scale(1.25); }
+
+@media (max-width: 600px) {
+  body[data-view="lesson"] .riddle {
+    min-height: 285px;
+  }
+
+  body[data-view="lesson"] .riddle-content {
+    min-height: 190px;
+    padding-inline: 4px;
+  }
+
+  body[data-view="lesson"] .riddle-description {
+    font-size: 25px;
+  }
+
+  body[data-view="lesson"] .answer .picture {
+    width: 92%;
+    min-height: 330px;
+  }
+
+  body[data-view="lesson"] .answer .picture img {
+    height: 275px;
+  }
+}

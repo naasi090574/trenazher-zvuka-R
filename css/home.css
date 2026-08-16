@@ -1,0 +1,51 @@
+.brand > span:last-child {
+  color: var(--violet);
+  font-size: 29px;
+  line-height: 1;
+  white-space: nowrap;
+}
+
+.home .lessons {
+  padding-top: 30px;
+}
+
+.home .lesson-grid {
+  align-items: start;
+}
+
+.home .lesson-card {
+  min-height: 0;
+}
+
+.lesson-card.active[data-open-card] {
+  cursor: pointer;
+}
+
+.lesson-card.active[data-open-card]:focus-visible {
+  outline: 4px solid #ff9d45;
+  outline-offset: 5px;
+}
+
+.lesson-cover {
+  width: calc(100% + 52px);
+  height: 220px;
+  object-fit: cover;
+  margin: -26px -26px 22px;
+  border-radius: 26px 26px 18px 18px;
+}
+
+.lesson-card.active[data-open-card]:hover {
+  transform: translateY(-9px);
+}
+
+.home .lesson-card.active h3 {
+  margin: 4px 0 22px;
+}
+
+.home .lesson-card.active .primary {
+  margin-top: auto;
+}
+
+body[data-view="home"] .lesson-card[data-lesson="lesson-1"] .primary {
+  margin-top: auto;
+}

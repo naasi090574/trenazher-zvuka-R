@@ -1,0 +1,60 @@
+@font-face {
+  font-family: "Adigiana Extreme";
+  src: url("../assets/fonts/AdigianaExtreme.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Cavolini Condensed";
+  src: url("../assets/fonts/Cavolini%20Condensed%20Bold.otf") format("opentype");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Gagalin";
+  src: url("../assets/fonts/Gagalin-Regular.otf") format("opentype");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Wallace Gromit";
+  src: url("../assets/fonts/WallaceGromit-Regular%20rus.otf") format("opentype");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+.brand > span:last-child,
+button,
+.eyebrow,
+.lesson-no,
+.soon,
+.meta,
+.step,
+.counter {
+  font-family: "Adigiana Extreme", sans-serif;
+}
+
+.lesson-card h3,
+.cover h1 {
+  font-family: "Wallace Gromit", sans-serif;
+  font-weight: normal;
+}
+
+.stage-head h1,
+.finish h1 {
+  font-family: "Gagalin", sans-serif;
+  font-weight: normal;
+}
+
+.toast,
+.chain small {
+  font-family: "Cavolini Condensed", sans-serif;
+  font-weight: 700;
+}

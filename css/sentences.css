@@ -1,0 +1,52 @@
+body[data-view="lesson"] .sentence .feature {
+  width: 100%;
+  max-width: 600px;
+  height: 430px;
+  min-height: 430px;
+  margin: 0 auto 12px;
+  gap: 8px;
+}
+
+body[data-view="lesson"] .sentence .feature img {
+  width: 100%;
+  height: 350px;
+  object-fit: contain;
+  transform: scale(1.35);
+  transform-origin: center;
+  pointer-events: none;
+}
+
+body[data-view="lesson"] .sentence .feature em {
+  min-height: 28px;
+  line-height: 28px;
+}
+
+body[data-view="lesson"] .sentence .feature img[src$="01-raduga.png"] { transform: scale(1.92); }
+body[data-view="lesson"] .sentence .feature img[src$="02-raketa.png"] { transform: scale(1.17); }
+body[data-view="lesson"] .sentence .feature img[src$="03-rakushka.png"] { transform: scale(1.72); }
+body[data-view="lesson"] .sentence .feature img[src$="04-ranets.png"] { transform: scale(1.36); }
+body[data-view="lesson"] .sentence .feature img[src$="05-robot.png"] { transform: scale(1.25); }
+body[data-view="lesson"] .sentence .feature img[src$="06-roliki.png"] { transform: scale(1.47); }
+body[data-view="lesson"] .sentence .feature img[src$="07-romashka.png"] { transform: scale(1.15); }
+body[data-view="lesson"] .sentence .feature img[src$="08-royal.png"] { transform: scale(1.4); }
+body[data-view="lesson"] .sentence .feature img[src$="09-rubashka.png"] { transform: scale(1.42); }
+body[data-view="lesson"] .sentence .feature img[src$="10-ruchka.png"] { transform: scale(1.28); }
+body[data-view="lesson"] .sentence .feature img[src$="11-rulet.png"] { transform: scale(1.5); }
+body[data-view="lesson"] .sentence .feature img[src$="12-rul.png"] { transform: scale(1.33); }
+body[data-view="lesson"] .sentence .feature img[src$="13-ryba.png"] { transform: scale(1.62); }
+body[data-view="lesson"] .sentence .feature img[src$="14-rybak.png"] { transform: scale(1.25); }
+body[data-view="lesson"] .sentence .feature img[src$="15-rys.png"] { transform: scale(1.3); }
+body[data-view="lesson"] .sentence .feature img[src$="16-rynok.png"] { transform: scale(1.92); }
+
+@media (max-width: 600px) {
+  body[data-view="lesson"] .sentence .feature {
+    max-width: 410px;
+    height: 315px;
+    min-height: 315px;
+    margin-bottom: 6px;
+  }
+
+  body[data-view="lesson"] .sentence .feature img {
+    height: 245px;
+  }
+}

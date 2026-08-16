@@ -1,0 +1,140 @@
+body[data-view="lesson"] .topbar {
+  position: absolute;
+  inset: 8px 0 auto;
+  height: 82px;
+  padding: 8px clamp(14px, 3vw, 40px);
+  pointer-events: none;
+}
+
+body[data-view="lesson"] .home-btn {
+  position: relative;
+  z-index: 7;
+  pointer-events: auto;
+}
+
+body[data-view="lesson"] .lesson-shell {
+  padding-top: 8px;
+}
+
+body[data-view="lesson"] .progress {
+  width: 100%;
+  margin-inline: auto;
+  top: 8px;
+}
+
+@media (max-width: 1520px) {
+  body[data-view="lesson"] .topbar {
+    position: relative;
+    inset: auto;
+    height: 64px;
+    padding: 8px 14px 0;
+  }
+
+  body[data-view="lesson"] .lesson-shell {
+    padding-top: 0;
+  }
+}
+
+body[data-view="lesson"] .stage-head,
+body[data-view="lesson"] .stage-head:first-of-type {
+  padding: 20px 10px 15px;
+}
+
+body[data-view="lesson"] .stage-head h1 {
+  margin-top: 7px;
+  margin-bottom: 5px;
+}
+
+body[data-view="lesson"] .stage-head p {
+  min-height: 22px;
+}
+
+body[data-view="lesson"] .is-placeholder,
+body[data-view="lesson"] .is-invisible {
+  visibility: hidden;
+  pointer-events: none;
+}
+
+body[data-view="lesson"] .picture em {
+  min-height: 28px;
+}
+
+body[data-view="lesson"] .riddle-content {
+  display: grid;
+  min-height: 405px;
+}
+
+body[data-view="lesson"] .riddle-content > .riddle-description,
+body[data-view="lesson"] .riddle-content > .answer {
+  grid-area: 1 / 1;
+  align-self: center;
+}
+
+body[data-view="lesson"] .riddle-content > .answer {
+  visibility: hidden;
+  pointer-events: none;
+}
+
+body[data-view="lesson"] .riddle-content.revealed > .riddle-description {
+  visibility: hidden;
+}
+
+body[data-view="lesson"] .riddle-content.revealed > .answer {
+  visibility: visible;
+  pointer-events: auto;
+}
+
+body[data-view="lesson"] .sorter .feature,
+body[data-view="lesson"] .sentence .feature {
+  height: 390px;
+  min-height: 390px;
+}
+
+body[data-view="lesson"] .sorter .feature img,
+body[data-view="lesson"] .sentence .feature img,
+body[data-view="lesson"] .answer img,
+body[data-view="lesson"] .story-grid img {
+  object-fit: contain;
+}
+
+body[data-view="lesson"] .sentence p {
+  min-height: 58px;
+}
+
+body[data-view="lesson"] .story-grid .picture {
+  height: 255px;
+  min-height: 255px;
+}
+
+@media (max-width: 900px) {
+  body[data-view="lesson"] .progress {
+    width: 100%;
+    margin-inline: auto;
+  }
+}
+
+@media (max-width: 600px) {
+  body[data-view="lesson"] .topbar {
+    top: 5px;
+    padding-inline: 10px;
+  }
+
+  body[data-view="lesson"] .progress {
+    width: 100%;
+    margin-inline: auto;
+  }
+
+  body[data-view="lesson"] .step {
+    min-height: 70px;
+  }
+
+  body[data-view="lesson"] .riddle-content {
+    min-height: 330px;
+  }
+
+  body[data-view="lesson"] .sorter .feature,
+  body[data-view="lesson"] .sentence .feature {
+    height: 285px;
+    min-height: 285px;
+  }
+}

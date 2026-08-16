@@ -1,0 +1,105 @@
+body[data-view="lesson"] .phrase-grid {
+  gap: 16px;
+}
+
+body[data-view="lesson"] .phrase-grid button {
+  --phrase-bg: #ffe5ef;
+  --phrase-border: #efabc4;
+  --phrase-shadow: #d998b1;
+  --phrase-badge: #d96f98;
+  position: relative;
+  display: grid;
+  place-items: center;
+  min-width: 0;
+  min-height: 104px;
+  padding: 23px 18px 17px;
+  border: 3px solid var(--phrase-border);
+  border-radius: 18px;
+  background: var(--phrase-bg);
+  color: #3f226f;
+  font-family: "Trebuchet MS", Arial, sans-serif;
+  font-size: 21px;
+  font-weight: 600;
+  line-height: 1.25;
+  letter-spacing: normal;
+  text-align: center;
+  box-shadow: 0 8px 0 var(--phrase-shadow), 0 12px 22px rgba(63, 34, 111, 0.1);
+  transition: transform 160ms ease, box-shadow 160ms ease, border-color 160ms ease;
+}
+
+body[data-view="lesson"] .phrase-grid button:nth-child(4n + 2) {
+  --phrase-bg: #eee3ff;
+  --phrase-border: #bca0e8;
+  --phrase-shadow: #a68bd0;
+  --phrase-badge: #8362bd;
+}
+
+body[data-view="lesson"] .phrase-grid button:nth-child(4n + 3) {
+  --phrase-bg: #dff7ec;
+  --phrase-border: #91d6b9;
+  --phrase-shadow: #78bda0;
+  --phrase-badge: #4ca781;
+}
+
+body[data-view="lesson"] .phrase-grid button:nth-child(4n + 4) {
+  --phrase-bg: #fff0d7;
+  --phrase-border: #edc77e;
+  --phrase-shadow: #d4ae68;
+  --phrase-badge: #c89237;
+}
+
+body[data-view="lesson"] .phrase-grid button:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 0 var(--phrase-shadow), 0 16px 25px rgba(63, 34, 111, 0.14);
+}
+
+body[data-view="lesson"] .phrase-grid button > span {
+  position: absolute;
+  top: 9px;
+  left: 9px;
+  display: grid;
+  place-items: center;
+  width: 27px;
+  height: 27px;
+  border-radius: 50%;
+  background: var(--phrase-badge);
+  color: #ffffff;
+  font-family: "Trebuchet MS", Arial, sans-serif;
+  font-size: 13px;
+  font-weight: 700;
+  line-height: 1;
+}
+
+body[data-view="lesson"] .phrase-grid button.said {
+  border-color: var(--phrase-badge);
+  background: var(--phrase-bg);
+  color: #3f226f;
+  box-shadow: 0 8px 0 var(--phrase-shadow), 0 0 0 4px rgba(91, 48, 156, 0.1);
+}
+
+body[data-view="lesson"] .phrase-grid button.said::after {
+  content: "✓";
+  position: absolute;
+  top: 8px;
+  right: 9px;
+  display: grid;
+  place-items: center;
+  width: 29px;
+  height: 29px;
+  border-radius: 50%;
+  background: #6536c6;
+  color: #ffffff;
+  font-family: "Trebuchet MS", Arial, sans-serif;
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 1;
+  box-shadow: 0 3px 0 #44208e;
+}
+
+@media (max-width: 600px) {
+  body[data-view="lesson"] .phrase-grid button {
+    min-height: 98px;
+    padding: 22px 12px 15px;
+    font-size: 20px;
+  }
+}

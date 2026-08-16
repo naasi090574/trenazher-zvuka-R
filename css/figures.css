@@ -1,0 +1,89 @@
+body[data-view="lesson"] .stage-head {
+  position: relative;
+  z-index: 1;
+  padding-top: 34px;
+}
+
+body[data-view="lesson"] .shape-card {
+  height: 250px;
+  padding: 16px;
+}
+
+body[data-view="lesson"] .shape-card > .shape {
+  width: 105px;
+  height: 105px;
+  margin: 14px auto 27px;
+}
+
+body[data-view="lesson"] .shape-card > strong {
+  color: #43216f;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 1.25;
+  text-transform: capitalize;
+}
+
+body[data-view="lesson"] .shape-card .picture {
+  gap: 5px;
+  padding: 9px 10px 12px;
+  background: #f5f1fa;
+}
+
+body[data-view="lesson"] .shape-card .picture img {
+  width: 100%;
+  height: 192px;
+  object-fit: contain;
+  transform: scale(1.18);
+  transform-origin: center;
+}
+
+body[data-view="lesson"] .shape-card .picture em {
+  position: relative;
+  z-index: 1;
+  color: #43216f;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 22px;
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+body[data-view="lesson"] .shape-card .picture img[src$="02-raketa.png"] {
+  transform: scale(1.25);
+}
+
+body[data-view="lesson"] .shape-card .picture img[src$="04-ranets.png"] {
+  transform: scale(1.34);
+}
+
+body[data-view="lesson"] .shape-card .picture img[src$="05-robot.png"] {
+  transform: scale(1.32);
+}
+
+body[data-view="lesson"] .shape-card .picture img[src$="07-romashka.png"] {
+  transform: scale(1.24);
+}
+
+body[data-view="lesson"] .shape-card .picture img[src$="14-rybak.png"] {
+  transform: scale(1.34);
+}
+
+body[data-view="lesson"] .shape-card .picture img[src$="16-rynok.png"] {
+  transform: scale(1.28);
+}
+
+@media (max-width: 600px) {
+  body[data-view="lesson"] .shape-card {
+    height: 220px;
+  }
+
+  body[data-view="lesson"] .shape-card > .shape {
+    width: 82px;
+    height: 82px;
+    margin-bottom: 24px;
+  }
+
+  body[data-view="lesson"] .shape-card .picture img {
+    height: 163px;
+  }
+}

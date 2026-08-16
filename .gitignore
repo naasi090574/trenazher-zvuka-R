@@ -1,0 +1,22 @@
+# Operating systems
+.DS_Store
+Thumbs.db
+Desktop.ini
+
+# Editors and IDEs
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# Temporary and local verification files
+*.tmp
+*.temp
+*.log
+screenshots/
+test-results/
+
+# Dependencies and build caches
+node_modules/
+.cache/
+dist/

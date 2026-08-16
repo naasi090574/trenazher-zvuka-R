@@ -1,0 +1,189 @@
+body[data-view="lesson"] .brand {
+  display: none;
+}
+
+body[data-view="lesson"] .topbar {
+  height: 76px;
+}
+
+body[data-view="lesson"] .home-btn {
+  margin-right: auto;
+  padding: 10px 16px;
+}
+
+body[data-view="lesson"] .progress {
+  gap: 10px;
+  padding: 15px;
+  border: 1px solid rgba(101, 54, 198, 0.1);
+}
+
+body[data-view="lesson"] .step {
+  min-height: 76px;
+  padding: 11px 7px;
+  background: #eee7fa;
+  color: #4f347d;
+  font-family: "Trebuchet MS", Arial, sans-serif;
+  font-size: 14px;
+  line-height: 1.15;
+}
+
+body[data-view="lesson"] .step b {
+  width: 34px;
+  height: 34px;
+  margin-bottom: 7px;
+  color: #5427a8;
+  font-size: 18px;
+}
+
+body[data-view="lesson"] .step.current {
+  background: #6536c6;
+  color: #fff;
+  box-shadow: 0 6px 0 #44208e;
+}
+
+body[data-view="lesson"] .step.current b,
+body[data-view="lesson"] .step.done b {
+  color: inherit;
+}
+
+body[data-view="lesson"] .step.done {
+  background: #8b69d5;
+  color: #fff;
+}
+
+body[data-view="lesson"] .step:disabled {
+  color: #4f347d;
+  opacity: 1;
+}
+
+body[data-view="lesson"] .stage-head {
+  padding-top: 30px;
+}
+
+body[data-view="lesson"] .stage-head > span {
+  display: inline-block;
+  padding: 8px 13px;
+  border-radius: 999px;
+  background: #eee5ff;
+  color: #4c258f;
+  letter-spacing: 0.06em;
+}
+
+body[data-view="lesson"] .stage-head h1 {
+  color: #5927ad;
+}
+
+body[data-view="lesson"] .chain-grid {
+  gap: 20px;
+}
+
+body[data-view="lesson"] .chain {
+  color: #3f226f;
+  border: 3px solid var(--chain-border);
+  background: var(--chain-bg);
+  box-shadow: 0 8px 0 var(--chain-shadow);
+}
+
+body[data-view="lesson"] .chain:nth-child(1) {
+  --chain-bg: #ffe4ef;
+  --chain-border: #f3a9c5;
+  --chain-shadow: #dda0b8;
+}
+
+body[data-view="lesson"] .chain:nth-child(2) {
+  --chain-bg: #eee2ff;
+  --chain-border: #c4a4f2;
+  --chain-shadow: #ae91d8;
+}
+
+body[data-view="lesson"] .chain:nth-child(3) {
+  --chain-bg: #dff8ed;
+  --chain-border: #8fd9bd;
+  --chain-shadow: #7abda5;
+}
+
+body[data-view="lesson"] .chain:nth-child(4) {
+  --chain-bg: #fff0d5;
+  --chain-border: #edc77c;
+  --chain-shadow: #d5af66;
+}
+
+body[data-view="lesson"] .chain.checked {
+  color: #3f226f;
+  border-color: #7140c4;
+  background: var(--chain-bg);
+  box-shadow: 0 8px 0 var(--chain-shadow), 0 0 0 5px rgba(113, 64, 196, 0.14);
+}
+
+body[data-view="lesson"] .chain small {
+  color: #523b74;
+  font-family: "Trebuchet MS", Arial, sans-serif;
+  font-size: 16px;
+  line-height: 1.35;
+}
+
+body[data-view="lesson"] .chain i {
+  display: grid;
+  place-items: center;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: #6536c6;
+  color: #fff;
+  font-size: 21px;
+  font-style: normal;
+  box-shadow: 0 3px 0 #44208e;
+}
+
+body[data-view="lesson"] .stage-nav {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 14px;
+  margin-top: 28px;
+  padding: 16px;
+  border: 1px solid #e4d7f7;
+  border-radius: 22px;
+  background: rgba(255, 255, 255, 0.78);
+  box-shadow: 0 10px 28px rgba(68, 32, 142, 0.1);
+}
+
+body[data-view="lesson"] .stage-nav button {
+  min-height: 54px;
+  border: 0;
+  border-radius: 15px;
+  font-size: 17px;
+}
+
+body[data-view="lesson"] .nav-ready {
+  background: #6536c6;
+  color: #fff;
+  box-shadow: 0 5px 0 #44208e;
+}
+
+body[data-view="lesson"] .nav-soft {
+  background: #eee5ff;
+  color: #5427a8;
+  box-shadow: 0 5px 0 #d0bceb;
+}
+
+body[data-view="lesson"] .stage-nav button:disabled {
+  cursor: not-allowed;
+  opacity: 0.48;
+}
+
+@media (max-width: 900px) {
+  body[data-view="lesson"] .progress span {
+    display: inline;
+  }
+
+  body[data-view="lesson"] .step {
+    min-height: 58px;
+    font-size: 12px;
+  }
+}
+
+@media (max-width: 600px) {
+  body[data-view="lesson"] .stage-nav {
+    grid-template-columns: 1fr;
+  }
+}
