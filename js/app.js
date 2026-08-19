@@ -44,6 +44,7 @@
   function stage3(index){
     const safeIndex=Math.max(0,Math.min(index,L3.stages.length-1));
     if(safeIndex===0)return stage3Entrance();
+    if(safeIndex===1)return stage3LivingPages();
     const info=L3.stages[safeIndex];
     state3=L3.loadProgress();state3={...state3,currentStage:safeIndex};L3.saveProgress(state3);
     set(`<section class="lesson-shell lesson-3-shell"><nav class="progress lesson-3-progress" aria-label="Этапы третьего занятия">${L3.stages.map((item,i)=>`<button class="step ${state3.completed.includes(i)?'done':''} ${i===safeIndex?'current':''}" data-step-3="${i}"><b>${state3.completed.includes(i)?'✓':i+1}</b><span>${item.shortTitle}</span></button>`).join('')}</nav><div class="stage-head lesson-3-head"><span>Этап ${safeIndex+1} из 12</span><h1>${info.title}</h1></div><div class="activity lesson-3-stage"><div class="lesson-3-coming">Этап готовится</div></div><nav class="stage-nav lesson-3-nav" aria-label="Навигация по этапам"><button class="nav-soft" data-stage-3-back>← Назад</button><button class="nav-ready" data-stage-3-ready>${state3.completed.includes(safeIndex)?'✓ Готово':'Готово'}</button><button class="nav-soft" data-stage-3-forward>Вперёд →</button></nav></section>`,'lesson-3');
@@ -51,6 +52,31 @@
     document.querySelector('[data-stage-3-back]').onclick=()=>safeIndex===0?cover3():stage3(safeIndex-1);
     document.querySelector('[data-stage-3-ready]').onclick=()=>{if(!state3.completed.includes(safeIndex)){state3={...state3,completed:[...state3.completed,safeIndex]};L3.saveProgress(state3)}stage3(safeIndex)};
     document.querySelector('[data-stage-3-forward]').onclick=()=>stage3(Math.min(safeIndex+1,L3.stages.length-1));
+  }
+  function stage3LivingPages(){
+    const shufflePages=items=>{const result=[...items];for(let i=result.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[result[i],result[j]]=[result[j],result[i]]}return result};
+    const books=[
+      {id:'giraffe',word:'ЖИРАФ',image:'giraffe.png'},
+      {id:'ram',word:'БАРАН',image:'ram.png'},
+      {id:'pirate',word:'ПИРАТ',image:'pirate.png'},
+      {id:'pie',word:'ПИРОГ',image:'pie.png'},
+      {id:'people',word:'НАРОД',image:'people.png'},
+      {id:'raven',word:'ВОРОН',image:'raven.png'}
+    ];
+    state3=L3.loadProgress();
+    const byId=new Map(books.map(book=>[book.id,book])),allIds=books.map(book=>book.id),savedOrder=Array.isArray(state3.stage2Order)?state3.stage2Order:[],validOrder=savedOrder.length===6&&new Set(savedOrder).size===6&&savedOrder.every(id=>byId.has(id)),order=validOrder?savedOrder:shufflePages(allIds),opened=new Set((state3.stage2Opened||[]).filter(id=>byId.has(id))),allOpened=opened.size===6;
+    state3={...state3,currentStage:1,stage2Order:order,stage2Opened:[...opened]};L3.saveProgress(state3);
+    const bookCards=order.map((id,i)=>{const book=byId.get(id),isOpen=opened.has(id);return `<article class="lesson-3-magic-book lesson-3-magic-book--${i+1} ${isOpen?'is-open':''}" data-stage-2-book="${id}"><div class="lesson-3-book-page lesson-3-book-page--word"><strong>${book.word}</strong></div><button class="lesson-3-book-page lesson-3-book-page--reveal" data-stage-2-open="${id}" aria-label="Открыть картинку для слова ${book.word}" ${isOpen?'disabled':''}><span class="lesson-3-page-back"><img src="./assets/lesson-3/lesson-3-stage-2-images/${book.image}" alt=""></span><span class="lesson-3-page-front" aria-hidden="true">?</span></button><span class="lesson-3-book-check" aria-hidden="true">✓</span><small>Повтори слово ещё раз</small></article>`}).join('');
+    set(`<section class="lesson-shell lesson-3-shell lesson-3-pages"><nav class="progress lesson-3-progress" aria-label="Этапы третьего занятия">${L3.stages.map((item,i)=>`<button class="step ${state3.completed.includes(i)?'done':''} ${i===1?'current':''}" data-step-3="${i}"><b>${state3.completed.includes(i)?'✓':i+1}</b><span>${item.shortTitle}</span></button>`).join('')}</nav><div class="stage-head lesson-3-head lesson-3-pages__head"><span>Этап 2 из 12</span><h1>ОЖИВШИЕ СТРАНИЦЫ</h1><p>Прочитай слово. Нажми на знак вопроса и проверь себя. Затем повтори слово ещё раз</p></div><div class="activity lesson-3-stage lesson-3-pages__stage"><div class="lesson-3-pages-progress">ОТКРЫТО СТРАНИЦ: <b data-stage-2-count>${opened.size}</b> ИЗ 6</div><div class="lesson-3-books-grid">${bookCards}</div><div class="lesson-3-pages-finish ${allOpened?'is-visible':''}" data-stage-2-finish>ВСЕ СТРАНИЦЫ ОЖИЛИ!</div></div><nav class="stage-nav lesson-3-nav" aria-label="Навигация по этапам"><button class="nav-soft" data-stage-3-back>← Назад</button><button class="nav-ready ${allOpened?'is-active':''}" data-stage-3-ready ${allOpened?'':'disabled'}>${state3.completed.includes(1)?'✓ Готово':'Готово'}</button><button class="nav-soft" data-stage-3-forward>Вперёд →</button></nav></section>`,'lesson-3');
+    document.querySelectorAll('[data-step-3]').forEach(button=>button.onclick=()=>stage3(+button.dataset.step3));
+    document.querySelector('[data-stage-3-back]').onclick=()=>stage3(0);
+    document.querySelector('[data-stage-3-forward]').onclick=()=>stage3(2);
+    const ready=document.querySelector('[data-stage-3-ready]');
+    ready.onclick=()=>{if(opened.size<6)return;if(!state3.completed.includes(1)){state3={...state3,completed:[...state3.completed,1]};L3.saveProgress(state3)}stage3LivingPages()};
+    document.querySelectorAll('[data-stage-2-open]').forEach(button=>button.onclick=event=>{
+      const id=event.currentTarget.dataset.stage2Open;if(opened.has(id))return;opened.add(id);event.currentTarget.disabled=true;event.currentTarget.closest('[data-stage-2-book]').classList.add('is-open');state3={...state3,stage2Opened:[...opened]};L3.saveProgress(state3);document.querySelector('[data-stage-2-count]').textContent=opened.size;
+      if(opened.size===6){document.querySelector('[data-stage-2-finish]').classList.add('is-visible');ready.disabled=false;ready.classList.add('is-active')}
+    });
   }
   function stage3Entrance(){
     const shuffleStage1=items=>{const result=[...items];for(let i=result.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[result[i],result[j]]=[result[j],result[i]]}return result};

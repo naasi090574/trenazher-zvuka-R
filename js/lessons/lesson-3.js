@@ -4,7 +4,7 @@ window.LESSON_3 = {
   progressKey: 'book-city-progress-v1',
   stages: [
     {shortTitle: 'Вход', title: 'Вход в книжный город'},
-    {shortTitle: 'Страницы', title: 'Перепутанные страницы'},
+    {shortTitle: 'Страницы', title: 'Ожившие страницы'},
     {shortTitle: 'Буква', title: 'Последняя буква'},
     {shortTitle: 'Полки', title: 'Три книжные полки'},
     {shortTitle: 'Буквы', title: 'Потерянные буквы'},
@@ -17,7 +17,7 @@ window.LESSON_3 = {
     {shortTitle: 'Письмо', title: 'Секретное письмо'}
   ],
   initialProgress() {
-    return {currentStage: 0, completed: [], stage1Completed: [], stage1CompletedWords: [], stage1Current: 0, stage1WordOrder: [], stage1CardOrders: {}};
+    return {currentStage: 0, completed: [], stage1Completed: [], stage1CompletedWords: [], stage1Current: 0, stage1WordOrder: [], stage1CardOrders: {}, stage2Opened: [], stage2Order: []};
   },
   loadProgress() {
     try {
