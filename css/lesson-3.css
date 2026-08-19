@@ -68,7 +68,8 @@ body[data-view="lesson-3"] { background:linear-gradient(145deg,#eef4ff,#f3eaff 5
 .lesson-3-pages__stage { display:block; min-height:590px; padding:17px 28px 21px; background:linear-gradient(145deg,rgba(255,255,255,.94),rgba(236,229,255,.9)); }
 .lesson-3-pages-progress { margin-bottom:13px; color:#5d339a; font-size:20px; font-weight:900; letter-spacing:.035em; text-align:center; }
 .lesson-3-books-grid { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:22px 27px; max-width:1650px; margin:auto; }
-.lesson-3-magic-book { --book-paper:#e9ddfa;--book-edge:#9b79c8; position:relative; display:grid; grid-template-columns:1fr 1fr; min-width:0; height:235px; border:4px solid var(--book-edge); border-radius:25px 25px 31px 31px; background:var(--book-paper); box-shadow:0 9px 0 color-mix(in srgb,var(--book-edge) 70%,#6d4b83),0 15px 24px rgba(52,32,83,.14); transition:filter .25s ease; }
+.lesson-3-magic-book { --book-paper:#e9ddfa;--book-edge:#9b79c8; position:relative; display:grid; grid-template-columns:1fr 1fr; min-width:0; height:235px; padding:0; overflow:visible; border:4px solid var(--book-edge); border-radius:25px 25px 31px 31px; background:var(--book-paper); color:inherit; cursor:pointer; box-shadow:0 9px 0 color-mix(in srgb,var(--book-edge) 70%,#6d4b83),0 15px 24px rgba(52,32,83,.14); transition:filter .25s ease; }
+.lesson-3-magic-book:disabled { cursor:default; opacity:1; }
 .lesson-3-magic-book::after { content:""; position:absolute; z-index:5; left:50%; top:8px; bottom:8px; width:5px; border-radius:9px; background:color-mix(in srgb,var(--book-edge) 65%,white); box-shadow:0 0 9px rgba(62,37,89,.18); transform:translateX(-50%); }
 .lesson-3-magic-book--2 { --book-paper:#dcecff;--book-edge:#78a1cc; }
 .lesson-3-magic-book--3 { --book-paper:#d9f2e9;--book-edge:#69aa91; }
@@ -76,6 +77,7 @@ body[data-view="lesson-3"] { background:linear-gradient(145deg,#eef4ff,#f3eaff 5
 .lesson-3-magic-book--5 { --book-paper:#ffe4d3;--book-edge:#c98c68; }
 .lesson-3-magic-book--6 { --book-paper:#fff1bd;--book-edge:#c9a64e; }
 .lesson-3-book-page { position:relative; display:grid; place-items:center; min-width:0; overflow:hidden; border:0; background:transparent; }
+.lesson-3-book-page,.lesson-3-book-check,.lesson-3-magic-book small { pointer-events:none; }
 .lesson-3-book-page--word { border-radius:20px 6px 18px 25px; background:linear-gradient(135deg,rgba(255,255,255,.58),transparent); }
 .lesson-3-book-page--word strong { color:#43226e; font-family:"Trebuchet MS",Arial,sans-serif; font-size:38px; font-weight:900; letter-spacing:.035em; }
 .lesson-3-book-page--reveal { border-radius:6px 20px 25px 18px; perspective:900px; }
