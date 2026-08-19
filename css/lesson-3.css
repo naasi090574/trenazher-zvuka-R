@@ -43,7 +43,7 @@ body[data-view="lesson-3"] { background:linear-gradient(145deg,#eef4ff,#f3eaff 5
 .lesson-3-book:nth-child(3n) { background:#ffe9ad; border-color:#dbbd64; }
 .lesson-3-book.is-done { border-color:#6b3caf; background:#7040bc; color:#fff; box-shadow:0 3px 0 #47247e; }
 .lesson-3-target-word { margin:7px auto 12px; color:#40216f; font-size:58px; font-weight:900; line-height:1; letter-spacing:.035em; text-align:center; text-shadow:0 3px 0 #fff,0 8px 18px rgba(86,47,137,.16); }
-.lesson-3-picture-grid { display:grid; grid-template-columns:repeat(6,minmax(0,1fr)); gap:18px; max-width:1650px; margin:auto; }
+.lesson-3-picture-grid { display:grid; grid-template-columns:repeat(var(--lesson-3-card-count,6),minmax(0,1fr)); gap:18px; max-width:1650px; margin:auto; }
 .lesson-3-picture-card { position:relative; z-index:1; display:grid; place-items:center; min-width:0; height:315px; padding:15px; border:4px solid var(--card-edge,#8b6fc1); border-radius:27px; background:var(--card-bg,#e9ddfa); box-shadow:0 9px 0 color-mix(in srgb,var(--card-edge) 72%,#51327f),0 17px 28px rgba(50,33,83,.15); transition:transform .18s ease,filter .25s ease,opacity .45s ease; }
 .lesson-3-picture-card--2 { --card-bg:#d9f1ef;--card-edge:#55a9a3; }
 .lesson-3-picture-card--3 { --card-bg:#dce9ff;--card-edge:#6a91c4; }
