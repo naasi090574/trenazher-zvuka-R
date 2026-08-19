@@ -62,22 +62,22 @@
       {word:'РЫЦАРЬ',image:'knight.png'}
     ];
     state3=L3.loadProgress();
-    const done=new Set(state3.stage1Completed||[]),current=Math.max(0,Math.min(Number(state3.stage1Current)||0,5)),roundDone=done.has(current),allDone=done.size===6;
+    const legacyDone=state3.stage1Completed||[],doneWords=new Set(state3.stage1CompletedWords?.length?state3.stage1CompletedWords:legacyDone.map(i=>words[i]?.word).filter(Boolean)),current=Math.max(0,Math.min(Number(state3.stage1Current)||0,5)),currentWord=words[current],roundDone=doneWords.has(currentWord.word),allDone=doneWords.size===6;
     state3={...state3,currentStage:0,stage1Current:current};L3.saveProgress(state3);
-    const progressDots=words.map((item,i)=>`<span class="lesson-3-book ${done.has(i)?'is-done':''}" aria-label="${done.has(i)?'Слово выполнено':`Слово ${i+1}`}">${done.has(i)?'✓':'▰'}</span>`).join('');
-    const cards=words.map((item,i)=>`<button class="lesson-3-picture-card lesson-3-picture-card--${i+1} ${roundDone&&i===current?'is-correct':''}" data-stage-1-choice="${i}" aria-label="Выбрать картинку ${i+1}" ${roundDone?'disabled':''}><img src="./assets/lesson-3/lesson-3-stage-1-images/${item.image}" alt=""><span class="lesson-3-picture-check" aria-hidden="true">✓</span></button>`).join('');
+    const progressDots=words.map((item,i)=>`<span class="lesson-3-book ${doneWords.has(item.word)?'is-done':''}" aria-label="${doneWords.has(item.word)?'Слово выполнено':`Слово ${i+1}`}">${doneWords.has(item.word)?'✓':'▰'}</span>`).join('');
+    const cards=words.map((item,i)=>`<button class="lesson-3-picture-card lesson-3-picture-card--${i+1} ${roundDone&&item.word===currentWord.word?'is-correct':''}" data-stage-1-word="${item.word}" data-stage-1-image="${item.image}" aria-label="Выбрать картинку ${i+1}" ${roundDone?'disabled':''}><img src="./assets/lesson-3/lesson-3-stage-1-images/${item.image}" alt=""><span class="lesson-3-picture-check" aria-hidden="true">✓</span></button>`).join('');
     const activity=allDone
       ? '<div class="lesson-3-page-restored"><span aria-hidden="true">✦ 📖 ✦</span><strong>ПЕРВАЯ СТРАНИЦА КНИГИ ВОССТАНОВЛЕНА!</strong></div>'
-      : `<div class="lesson-3-word-progress"><strong>СЛОВО ${current+1} ИЗ 6</strong><div>${progressDots}</div></div><div class="lesson-3-target-word">${words[current].word}</div><div class="lesson-3-picture-grid">${cards}</div><div class="lesson-3-round-footer"><p data-stage-1-feedback aria-live="polite">${roundDone?'Верно! Повтори слово ещё раз.':' '}</p>${roundDone?'<button class="primary lesson-3-next-word" data-stage-1-next>Следующее слово →</button>':''}</div>`;
+      : `<div class="lesson-3-word-progress"><strong>СЛОВО ${current+1} ИЗ 6</strong><div>${progressDots}</div></div><div class="lesson-3-target-word">${currentWord.word}</div><div class="lesson-3-picture-grid">${cards}</div><div class="lesson-3-round-footer"><p data-stage-1-feedback aria-live="polite">${roundDone?'Верно! Повтори слово ещё раз':' '}</p>${roundDone?'<button class="primary lesson-3-next-word" data-stage-1-next>Следующее слово →</button>':''}</div>`;
     set(`<section class="lesson-shell lesson-3-shell lesson-3-entrance"><nav class="progress lesson-3-progress" aria-label="Этапы третьего занятия">${L3.stages.map((item,i)=>`<button class="step ${state3.completed.includes(i)?'done':''} ${i===0?'current':''}" data-step-3="${i}"><b>${state3.completed.includes(i)?'✓':i+1}</b><span>${item.shortTitle}</span></button>`).join('')}</nav><div class="stage-head lesson-3-head lesson-3-entrance__head"><span>Этап 1 из 12</span><h1>ВХОД В КНИЖНЫЙ ГОРОД</h1><p>Прочитай слово, выбери подходящую картинку и повтори слово ещё раз</p></div><div class="activity lesson-3-stage lesson-3-entrance__stage">${activity}</div><nav class="stage-nav lesson-3-nav" aria-label="Навигация по этапам"><button class="nav-soft" data-stage-3-back>← Назад</button><button class="nav-ready" data-stage-3-ready ${allDone?'':'disabled'}>${state3.completed.includes(0)?'✓ Готово':'Готово'}</button><button class="nav-soft" data-stage-3-forward>Вперёд →</button></nav></section>`,'lesson-3');
     document.querySelectorAll('[data-step-3]').forEach(button=>button.onclick=()=>stage3(+button.dataset.step3));
     document.querySelector('[data-stage-3-back]').onclick=cover3;
     document.querySelector('[data-stage-3-forward]').onclick=()=>stage3(1);
     document.querySelector('[data-stage-3-ready]').onclick=()=>{if(!allDone)return;if(!state3.completed.includes(0)){state3={...state3,completed:[...state3.completed,0]};L3.saveProgress(state3)}stage3Entrance()};
-    document.querySelectorAll('[data-stage-1-choice]').forEach(card=>card.onclick=()=>{
-      const choice=+card.dataset.stage1Choice,feedback=document.querySelector('[data-stage-1-feedback]');
-      if(choice!==current){card.classList.remove('is-wrong');void card.offsetWidth;card.classList.add('is-wrong');feedback.textContent='Посмотри внимательно';return}
-      done.add(current);state3={...state3,stage1Completed:[...done]};L3.saveProgress(state3);stage3Entrance();
+    document.querySelectorAll('[data-stage-1-word]').forEach(card=>card.onclick=()=>{
+      const selectedWord=card.dataset.stage1Word,selectedImage=card.dataset.stage1Image,feedback=document.querySelector('[data-stage-1-feedback]');
+      if(selectedWord!==currentWord.word||selectedImage!==currentWord.image){card.classList.remove('is-wrong');void card.offsetWidth;card.classList.add('is-wrong');feedback.textContent='Посмотри внимательно';return}
+      doneWords.add(currentWord.word);state3={...state3,stage1CompletedWords:[...doneWords],stage1Completed:words.map((item,i)=>doneWords.has(item.word)?i:null).filter(i=>i!==null)};L3.saveProgress(state3);stage3Entrance();
     });
     document.querySelector('[data-stage-1-next]')?.addEventListener('click',()=>{state3={...state3,stage1Current:Math.min(current+1,5)};L3.saveProgress(state3);stage3Entrance()});
   }

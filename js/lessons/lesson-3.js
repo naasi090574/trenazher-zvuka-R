@@ -17,7 +17,7 @@ window.LESSON_3 = {
     {shortTitle: 'Письмо', title: 'Секретное письмо'}
   ],
   initialProgress() {
-    return {currentStage: 0, completed: [], stage1Completed: [], stage1Current: 0};
+    return {currentStage: 0, completed: [], stage1Completed: [], stage1CompletedWords: [], stage1Current: 0};
   },
   loadProgress() {
     try {
