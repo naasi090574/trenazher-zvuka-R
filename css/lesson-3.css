@@ -30,4 +30,37 @@ body[data-view="lesson-3"] { background:linear-gradient(145deg,#eef4ff,#f3eaff 5
 .lesson-3-nav { display:grid; grid-template-columns:1fr 1fr 1fr; gap:18px; margin-top:18px; }
 .lesson-3-nav button { min-height:58px; }
 .lesson-3-nav .nav-ready { background:#7040bc; color:#fff; border:0; border-radius:16px; font-weight:900; box-shadow:0 6px 0 #492481; }
+.lesson-3-nav .nav-ready:disabled { opacity:.5; cursor:not-allowed; box-shadow:none; }
+.lesson-3-entrance__head { padding-block:15px 12px; }
+.lesson-3-entrance__head h1 { font-size:45px; }
+.lesson-3-entrance__head p { color:#5d4a78; font-size:20px; font-weight:800; }
+.lesson-3-entrance__stage { display:block; min-height:550px; padding:20px 34px 24px; background:linear-gradient(145deg,rgba(255,255,255,.94),rgba(238,230,255,.88)); overflow:hidden; }
+.lesson-3-word-progress { display:flex; align-items:center; justify-content:center; gap:25px; min-height:38px; color:#593194; }
+.lesson-3-word-progress>strong { font-size:19px; letter-spacing:.05em; }
+.lesson-3-word-progress>div { display:flex; gap:9px; }
+.lesson-3-book { display:grid; place-items:center; width:31px; height:25px; border:2px solid #bca7dc; border-radius:5px 9px 9px 5px; background:#e2d5f5; color:#6940a0; font-size:13px; font-weight:900; box-shadow:inset 4px 0 0 rgba(255,255,255,.45); }
+.lesson-3-book:nth-child(2n) { background:#d2efed; border-color:#90ccc7; }
+.lesson-3-book:nth-child(3n) { background:#ffe9ad; border-color:#dbbd64; }
+.lesson-3-book.is-done { border-color:#6b3caf; background:#7040bc; color:#fff; box-shadow:0 3px 0 #47247e; }
+.lesson-3-target-word { margin:7px auto 12px; color:#40216f; font-size:58px; font-weight:900; line-height:1; letter-spacing:.035em; text-align:center; text-shadow:0 3px 0 #fff,0 8px 18px rgba(86,47,137,.16); }
+.lesson-3-picture-grid { display:grid; grid-template-columns:repeat(6,minmax(0,1fr)); gap:18px; max-width:1650px; margin:auto; }
+.lesson-3-picture-card { position:relative; display:grid; place-items:center; min-width:0; height:315px; padding:15px; border:4px solid var(--card-edge,#8b6fc1); border-radius:27px; background:var(--card-bg,#e9ddfa); box-shadow:0 9px 0 color-mix(in srgb,var(--card-edge) 72%,#51327f),0 17px 28px rgba(50,33,83,.15); transition:transform .18s ease,filter .18s ease; }
+.lesson-3-picture-card--2 { --card-bg:#d9f1ef;--card-edge:#55a9a3; }
+.lesson-3-picture-card--3 { --card-bg:#dce9ff;--card-edge:#6a91c4; }
+.lesson-3-picture-card--4 { --card-bg:#fff0bd;--card-edge:#c59a3d; }
+.lesson-3-picture-card--5 { --card-bg:#eadcf6;--card-edge:#9a6db9; }
+.lesson-3-picture-card--6 { --card-bg:#d8f0e5;--card-edge:#61a982; }
+.lesson-3-picture-card:not(:disabled):hover { transform:translateY(-5px); }
+.lesson-3-picture-card img { width:100%; height:270px; object-fit:contain; filter:drop-shadow(0 10px 8px rgba(41,28,64,.16)); }
+.lesson-3-picture-check { position:absolute; right:12px; top:11px; display:grid; place-items:center; width:52px; height:52px; border:4px solid #fff; border-radius:50%; background:#7040bc; color:#fff; font-size:32px; font-weight:900; opacity:0; transform:scale(.5); }
+.lesson-3-picture-card.is-correct { filter:drop-shadow(0 0 19px #f0c95f) drop-shadow(0 0 10px #7b4cc7); }
+.lesson-3-picture-card.is-correct .lesson-3-picture-check { opacity:1; transform:scale(1); }
+.lesson-3-picture-card.is-wrong { animation:lesson-3-gentle-shake .32s ease; }
+.lesson-3-round-footer { min-height:72px; display:flex; align-items:center; justify-content:center; gap:25px; }
+.lesson-3-round-footer p { min-width:270px; margin:0; color:#6a3d9d; font-size:20px; font-weight:900; text-align:center; }
+.lesson-3-next-word { padding:12px 24px; background:linear-gradient(145deg,#7a4ecb,#56309d); box-shadow:0 5px 0 #3d1e78; }
+.lesson-3-page-restored { display:grid; place-items:center; align-content:center; gap:28px; min-height:500px; padding:45px; border:4px solid #d0b267; border-radius:32px; background:radial-gradient(circle at 50% 45%,#fffce7,#eee2ff 72%); color:#48237f; text-align:center; box-shadow:inset 0 0 45px rgba(240,201,95,.25),0 9px 0 #c6a751; }
+.lesson-3-page-restored span { color:#c29531; font-size:80px; }
+.lesson-3-page-restored strong { max-width:1050px; font-size:47px; line-height:1.15; }
+@keyframes lesson-3-gentle-shake { 25%{transform:rotate(-2deg) translateX(-5px)} 75%{transform:rotate(2deg) translateX(5px)} }
 @media(max-width:1200px){.lesson-3-cover__panel{width:min(700px,60vw)}.lesson-3-progress{grid-template-columns:repeat(6,minmax(105px,1fr));overflow-x:auto}.lesson-3-stage{min-height:410px}}
