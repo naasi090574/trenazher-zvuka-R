@@ -17,7 +17,7 @@ window.LESSON_3 = {
     {shortTitle: 'Письмо', title: 'Секретное письмо'}
   ],
   initialProgress() {
-    return {currentStage: 0, completed: [], stage1Completed: [], stage1CompletedWords: [], stage1Current: 0, stage1WordOrder: [], stage1CardOrders: {}, stage2Opened: [], stage2Order: []};
+    return {currentStage: 0, completed: [], stage1Completed: [], stage1CompletedWords: [], stage1Current: 0, stage1WordOrder: [], stage1CardOrders: {}, stage2Task: 0, stage2Opened: [], stage2Order: [], stage2FindOrder: [], stage2FindCurrent: 0, stage2FindDone: [], stage2MatchOrder: [], stage2Matched: [], stage2LastPhrase: ''};
   },
   loadProgress() {
     try {
